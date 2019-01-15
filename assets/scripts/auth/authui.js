@@ -8,6 +8,7 @@ $('#lineups-view-div').hide()
 $('#owned-contest-view-div').hide()
 $('#individual-contest-view-div').hide()
 $('#choose-lineup-view-div').hide()
+$('.nav-bar').hide()
 
 const resetAuthForms = () => {
   $('#sign-up')[0].reset()
@@ -36,6 +37,7 @@ const logInSuccess = function (data) {
   $('.logged-out').hide()
   $('#log-in-view-div').hide()
   $('#available-contest-view-div').show()
+  $('.nav-bar').show()
 }
 
 const logInFailure = function () {
@@ -70,6 +72,7 @@ const logOutSuccess = function () {
   $('#owned-contest-view-div').hide()
   $('#individual-contest-view-div').hide()
   $('#choose-lineup-view-div').hide()
+  $('.nav-bar').hide()
 }
 
 const logOutFailure = function () {

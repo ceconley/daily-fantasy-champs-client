@@ -21,6 +21,12 @@ const showChangePassword = () => {
   $('#owned-contest-view-div').hide()
   $('#individual-contest-view-div').hide()
   $('#choose-lineup-view-div').hide()
+  $('.nav-bar').hide()
+}
+
+const closeChangePassword = () => {
+  $('#change-password-view-div').hide()
+  $('#available-contest-view-div').show()
 }
 
 const onSignUp = (event) => {
@@ -61,5 +67,6 @@ module.exports = {
   onLogOut,
   showSignUp,
   showLogIn,
-  showChangePassword
+  showChangePassword,
+  closeChangePassword
 }
