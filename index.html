@@ -12,62 +12,108 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
+      <!-- HEADER -->
       <div class="container" id="header-div">
         <div class="row">
+          <div class="col-sm-9">
+            <h1>Daily Fantasy Champs</h1>
+          </div>
+          <div class="col-sm-3 auth-links logged-out">
+            <a id=sign-up-link>Sign Up</a> |
+            <a id=log-in-link>Log In</a>
+          </div>
+          <div class="col-sm-3 auth-links logged-in">
+            <a id=change-password-link>Change Password</a> |
+            <a id=log-out-link>Log Out</a>
+          </div>           
+        </div>
+      </div>
+      <!-- AUTHENTICATION -->
+      <!-- SIGN UP -->
+      <div class="container" id="sign-up-view-div">
+        <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
-              <div>
-                <div class="logged-out">
-                  <a id=sign-up>Sign Up</a> |
-                  <a id=log-in>Log In</a>
-                </div>
-                <div class="logged-in">
-                  <a id=change-password>Change Password</a> |
-                  <a id=log-out>Log Out</a>
-                </div>           
-              </div>
+            <form id="sign-up">
+              <fieldset>
+                <legend>Sign Up</legend>
+                <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+                <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+                <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" class="forms">
+                <input type="submit" value="Sign Up" class="buttons">
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- LOG IN -->
+      <div class="container" id="log-in-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <form id="log-in">
+              <fieldset>
+                <legend>Log In</legend>
+                <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+                <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+                <input type="submit" value="Log In" class="buttons">
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- CHANGE PASSWORD -->
+      <div class="container" id="change-password-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <form id="change-password">
+              <fieldset>
+                <input type="password" name="passwords[old]" placeholder="Old password" class="forms">
+                <input type="password" name="passwords[new]" placeholder="New password" class="forms">
+                <input type="password" name="credentials[password_confirmation]" placeholder="Confirm New Password" class="forms">
+                <input type="submit" value="Change password" class="buttons">
+              </fieldset>
+            </form>
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- ALL OTHER VIEWS -->
+      <!-- AVAILABLE CONTESTS -->
+      <div class="container" id="available-contest-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <h3>Available Contests</h3>
+            
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- MY LINEUPS -->
+      <div class="container" id="lineups-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <h3>My Lineups</h3>
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- MY CONTESTS -->
+      <div class="container" id="owned-contest-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <h3>My Contests</h3>
           </div>
         </div>
       </div>
-      <div class="container" id="header-div">
+      <!-- INDIVIDUAL CONTESTS -->
+      <div class="container" id="individual-contest-view-div">
         <div class="row">
           <div>
-              <h1>Daily Fantasy Champs</h1>
+            <h3>Contest: </h3>
+          </div>
+        </div>
+      </div>
+      <!-- CHOOSE LINEUP -->
+      <div class="container" id="choose-lineup-view-div">
+        <div class="row">
+          <div>
+            <h3>Choose Lineup</h3>
           </div>
         </div>
       </div>
