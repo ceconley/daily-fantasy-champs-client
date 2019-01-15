@@ -11,15 +11,17 @@
         <th scope="col">Leader</th>
       </tr>
     </thead>
+    <br/>
+    <br/>
     <tbody>
+      {{#each contests as |contest|}}
       <tr>
-        {{#each constests as |contest|}}
-          <td>{{this.id}}</td>
-          <td>{{this.name}}</td>
-          <td>${{this.entrants_total}}</td>
-          <td>{{this.entrants_current}}</td>
-          <td>{{this.winner}}</td>
-        {{/each}}
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.entrants_total}}</td>
+        <td>{{this.entrants_current}}</td>
+        <td>{{this.winner}}</td>
+      {{/each}}
       </tr>
     </tbody>
   </table>
