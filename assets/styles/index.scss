@@ -16,3 +16,9 @@
   display: flex;
   justify-content: space-around;
 }
+
+.contest-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+}

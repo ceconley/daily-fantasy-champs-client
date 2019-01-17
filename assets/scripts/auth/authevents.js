@@ -40,7 +40,7 @@ const onSignUp = (event) => {
 const onLogIn = (event) => {
   event.preventDefault()
   const data = getFormFields(event.target)
-  authApi.logIn(data)
+  authApi.logIn(data, event)
     .then(authUi.logInSuccess)
     .catch(authUi.logInFailure)
 }

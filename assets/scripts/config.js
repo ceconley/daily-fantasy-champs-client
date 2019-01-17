@@ -2,7 +2,7 @@
 
 let apiUrl
 const apiUrls = {
-  production: '<replace-with-heroku-url>',
+  production: 'https://git.heroku.com/daily-fantasy-champs-rails-api.git',
   development: 'http://localhost:4741'
 }
 

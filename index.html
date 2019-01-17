@@ -113,6 +113,20 @@
         <div class="row">
           <div>
             <h3>Contest: </h3>
+            <div id="contest-card"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modalContestCard">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body" id="contestCardBody">
+              <button id="join-contest">Join</button>
+            </div>
+            <div class="modal-footer">
+              <p id="change-password-success"></p>
+              <button type="button" class="btn btn-secondary close" data-dismiss="modal" id="change-password-close">CLOSE</button>
+            </div>
           </div>
         </div>
       </div>
@@ -121,59 +135,164 @@
         <div class="row">
           <div>
             <h3>Choose Lineup</h3>
-            <form>
+            <form id="select-lineup">
                 <p>Select a lineup:</p>
                 <div>
-                  <input type="radio" id="lineupChoice1"
+                  <!-- <input type="radio" id="lineupChoice1"
                    name="lineup" value="lineup1">
-                  <label for="lineupChoice1">
-                    <ul>
-                      <li>QB	Patrick Mahomes</li>
-                      <li>RB	Sony Michel</li>
-                      <li>RB	Damien Williams</li>
-                      <li>WR	Julian Edelman</li>
-                      <li>WR	Tyreek Hill</li>
-                      <li>WR	Robert Woods</li>
-                      <li>TE	Rob Gronkowski</li>
-                      <li>FLEX	C.J. Anderson</li>
-                      <li>DST	Rams	</li>
-                    </ul>
-                  </label>
+                  <label for="lineupChoice1"> -->
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Pos.</th>
+                          <th>Players</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>QB</td>
+                          <td id="qb1">Patrick Mahomes</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="qb1">Sony Michel</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="qb1">Damien Williams</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Julian Edelman</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Tyreek Hill</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Robert Woods</td>
+                        </tr>
+                        <tr>
+                          <td>TE</td>
+                          <td id="qb1">Rob Gronkowski</td>
+                        </tr>
+                        <tr>
+                          <td>FLEX</td>
+                          <td id="qb1">C.J. Anderson</td>
+                        </tr>
+                        <tr>
+                          <td>DST</td>
+                          <td id="qb1">Rams</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button id="submit-lineup1">Enter</button>
+                  <!-- </label> -->
               
-                  <input type="radio" id="lineupChoice2"
+                  <!-- <input type="radio" id="lineupChoice2"
                    name="lineup" value="lineup2">
-                  <label for="lineupChoice2">
-                    <ul>
-                      <li>QB	Tom Brady</li>
-                      <li>RB	Todd Gurley</li>
-                      <li>RB	Damien Williams</li>
-                      <li>WR	Tyreek Hill</li>
-                      <li>WR	Josh Reynolds</li>
-                      <li>WR	Michael Thomas</li>
-                      <li>TE	Gerald Everett</li>
-                      <li>FLEX	Ted Ginn Jr.</li>
-                      <li>DST	Saints</li>
-                    </ul>
-                  </label>
+                  <label for="lineupChoice2"> -->
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Pos.</th>
+                          <th>Players</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>QB</td>
+                          <td id="qb1">Tom Brady</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="rb1">Todd Gurley</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="qb1">Damien Williams</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Tyreek Hill</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Josh Reynolds</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Michael Thomas</td>
+                        </tr>
+                        <tr>
+                          <td>TE</td>
+                          <td id="qb1">Gerald Everett</td>
+                        </tr>
+                        <tr>
+                          <td>FLEX</td>
+                          <td id="qb1">Ted Ginn Jr.</td>
+                        </tr>
+                        <tr>
+                          <td>DST</td>
+                          <td id="qb1">Saints</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button id="submit-lineup2">Enter</button>
+                  <!-- </label> -->
               
-                  <input type="radio" id="lineupChoice3"
+                  <!-- <input type="radio" id="lineupChoice3"
                    name="lineup" value="lineup3">
-                  <label for="lineupChoice3">
-                    <ul>
-                      <li>QB	Jared Goff</li>
-                      <li>RB	Todd Gurley</li>	
-                      <li>RB	Alvin Kamara</li>	
-                      <li>WR	Chris Hogan</li>
-                      <li>WR	Michael Thomas</li>	
-                      <li>WR	Sammy Watkins</li>	
-                      <li>TE	Travis Kelce</li>	
-                      <li>FLEX	James White</li>	
-                      <li>DST	Patriots</li>
-                    </ul>
-                  </label>
-                </div>
-                <div>
-                  <button type="submit">Submit</button>
+                  <label for="lineupChoice3"> -->
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Pos.</th>
+                          <th>Players</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>QB</td>
+                          <td id="qb1">Jared Goff</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="qb1">Todd Gurley</td>
+                        </tr>
+                        <tr>
+                          <td>RB</td>
+                          <td id="qb1">Alvin Kamara</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Michael Thomas</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Sammy Watkins</td>
+                        </tr>
+                        <tr>
+                          <td>WR</td>
+                          <td id="qb1">Chris Hogan</td>
+                        </tr>
+                        <tr>
+                          <td>TE</td>
+                          <td id="qb1">Travis Kelce</td>
+                        </tr>
+                        <tr>
+                          <td>FLEX</td>
+                          <td id="qb1">James White</td>
+                        </tr>
+                        <tr>
+                          <td>DST</td>
+                          <td id="qb1">Patriots</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <button id="submit-lineup3">Enter</button>
+                  <!-- </label> -->
                 </div>
               </form>
           </div>
