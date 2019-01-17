@@ -1,1 +1,51 @@
-<p>hi</p>
+<div>
+  {{#each lineups as |lineup|}}
+    <h5>Lineup: {{this.id}}</h5>
+    <table>
+      <thead>
+        <tr>
+          <th>Pos.</th>
+          <th>Players</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>QB</td>
+          <td>{{this.qb}}</td>
+        </tr>
+        <tr>
+          <td>RB</td>
+          <td>{{this.rb1}}</td>
+        </tr>
+        <tr>
+          <td>RB</td>
+          <td>{{this.rb2}}</td>
+        </tr>
+        <tr>
+          <td>WR</td>
+          <td>{{this.wr1}}</td>
+        </tr>
+        <tr>
+          <td>WR</td>
+          <td>{{this.wr2}}</td>
+        </tr>
+        <tr>
+          <td>WR</td>
+          <td>{{this.wr3}}</td>
+        </tr>
+        <tr>
+          <td>TE</td>
+          <td>{{this.te}}</td>
+        </tr>
+        <tr>
+          <td>Flex</td>
+          <td>{{this.flex}}</td>
+        </tr>
+        <tr>
+          <td>DST</td>
+          <td>{{this.dst}}</td>
+        </tr>
+      </tbody>
+    </table>
+  {{/each}}
+</div>

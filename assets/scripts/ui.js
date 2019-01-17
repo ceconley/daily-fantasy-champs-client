@@ -1,6 +1,7 @@
 const showAllContests = require('./../../contest-table.handlebars')
 const showAllLineups = require('./../../lineup-card.handlebars')
 const showOneContest = require('./../../contest-card.handlebars')
+const store = require('./store.js')
 
 const onIndexContestSuccess = (response) => {
   console.log(response)
@@ -37,8 +38,21 @@ const onIndexlineupFailure = () => {
 
 const onSubmitlineupSuccess = (response) => {
   console.log(response)
+  store.lineup = response.lineup.id
+  $('#modalEnterLineup').modal('show')
 }
+
 const onSubmitlineupFailure = () => {
+  console.error('error')
+}
+
+const onCreateEntrySuccess = () => {
+  $('#modalEnterLineup').modal('hide')
+  $('#choose-lineup-view-div').hide()
+  $('#owned-contest-view-div').show()
+
+}
+const onCreateEntryFailure = () => {
   console.error('error')
 }
 
@@ -50,5 +64,7 @@ module.exports = {
   onShowContestSuccess,
   onShowContestFailure,
   onSubmitlineupSuccess,
-  onSubmitlineupFailure   
+  onSubmitlineupFailure,
+  onCreateEntrySuccess,
+  onCreateEntryFailure
 }

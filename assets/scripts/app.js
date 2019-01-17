@@ -22,4 +22,6 @@ $(() => {
   $('#submit-lineup1').on('click', events.onLineup1)
   $('#submit-lineup2').on('click', events.onLineup2)
   $('#submit-lineup3').on('click', events.onLineup3)
+  $('#enter-lineup').on('click', events.onEnterLineup)
+  
 })

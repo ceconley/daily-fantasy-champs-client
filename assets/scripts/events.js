@@ -1,10 +1,10 @@
 const api = require('./api')
 const ui = require('./ui')
-// const store = require('./store.js')
+const store = require('./store.js')
 
 const onLineup1 = (event) => {
   event.preventDefault()
-  const lineup = {
+  const data = {lineup: {
     qb: 'Patrick Mahomes',
     rb1: 'Sony Michel',
     rb2: 'Damien Williams',
@@ -16,8 +16,8 @@ const onLineup1 = (event) => {
     dst: 'Rams',
     score: 0.0
   }
-  const data = lineup
-  console.log(data)
+  }
+  store.lineup = data
   api.submitLineup(data)
     .then(ui.onSubmitlineupSuccess)
     .catch(ui.onSubmitlineupFailure)
@@ -72,6 +72,7 @@ const onIndexContest = (event) => {
 }
 
 const onShowContest = (event) => {
+  store.contest = event.target.id
   api.showContest(event)
     .then(ui.onShowContestSuccess)
     .catch(ui.onShowContestFailure)
@@ -83,15 +84,22 @@ const onIndexLineup = () => {
     .catch(ui.onIndexlineupFailure)
 }
 
-// const onSubmitLineup = (event) => {
-//   event.preventDefault()
-//   console.log(event)
-//   const data = lineup
-//   console.log(data)
-//   api.submitLineup(data)
-//     .then(ui.onSubmitlineupSuccess)
-//     .catch(ui.onSubmitlineupFailure)
-// }
+const onEnterLineup = () => {
+  const user = store.user.email
+  const contest = store.contest
+  const lineup = store.lineup
+  const data = {entry: {
+    user_id: user,
+    contest_id: contest,
+    lineup_id: lineup
+  }}
+  console.log(`user:${user}`)
+  console.log(`contest:${contest}`)
+  console.log(`lineup:${lineup}`)
+  api.createEntry(data)
+    .then(ui.onCreateEntrySuccess)
+    .catch(ui.onCreateEntryFailure)
+}
 
 const onChooseLineup = (event) => {
   $('#available-contest-view-div').hide()
@@ -102,17 +110,22 @@ const showMyLineups = (event) => {
   $('#available-contest-view-div').hide()
   $('#lineups-view-div').show()
   $('#owned-contest-view-div').hide()
+  $('#choose-lineup-view-div').hide()
   onIndexLineup(event)
 }
+
 const showMyContests = () => {
   $('#available-contest-view-div').hide()
   $('#lineups-view-div').hide()
   $('#owned-contest-view-div').show()
+  $('#choose-lineup-view-div').hide()
 }
+
 const showAvailableContests = (event) => {
   $('#available-contest-view-div').show()
   $('#lineups-view-div').hide()
   $('#owned-contest-view-div').hide()
+  $('#choose-lineup-view-div').hide()
   onIndexContest(event)
 }
 
@@ -124,8 +137,8 @@ module.exports = {
   onIndexLineup,
   onShowContest,
   onChooseLineup,
-  // onSubmitLineup,
   onLineup1,
   onLineup2,
-  onLineup3
+  onLineup3,
+  onEnterLineup
 }

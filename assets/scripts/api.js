@@ -32,9 +32,20 @@ const submitLineup = (data) =>
     data
   })
 
+const createEntry = (data) =>
+  $.ajax({
+    url: config.apiUrl + '/entries',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+
 module.exports = {
   indexContest,
   indexLineup,
   showContest,
-  submitLineup
+  submitLineup,
+  createEntry
 }
