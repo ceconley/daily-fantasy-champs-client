@@ -1,12 +1,14 @@
-<div>
+<div class="each-lineup">
   {{#each lineups as |lineup|}}
-    <h5>Lineup: {{this.id}}</h5>
-    <table>
+    <h5>Lineup: {{this.id}}</h5> 
+    <a class="changeLineupLink" id="{{this.id}}">Change Lineup</a> | 
+    <a class="delete-lineup" id="{{this.id}}">Delete</a>
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Pos.</th>
           <th>Players</th>
-        </tr>
+        </t
       </thead>
       <tbody>
         <tr>

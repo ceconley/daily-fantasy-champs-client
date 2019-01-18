@@ -1,7 +1,7 @@
 const config = require('./config')
 const store = require('./store.js')
 
-const indexContest = () =>
+const indexContests = () =>
   $.ajax({
     url: config.apiUrl + '/contests',
     method: 'GET'
@@ -13,13 +13,10 @@ const showContest = (event) =>
     method: 'GET'
   })
 
-const indexLineup = () =>
+const indexLineups = () =>
   $.ajax({
     url: config.apiUrl + '/lineups',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
+    method: 'GET'
   })
 
 const submitLineup = (data) =>
@@ -42,10 +39,41 @@ const createEntry = (data) =>
     data
   })
 
+const deleteLineup = (data) =>
+  $.ajax({
+    url: config.apiUrl + '/lineups/' + data,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+
+const indexMyContests = () =>
+  $.ajax({
+    url: config.apiUrl + '/entries',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+
+const updateLineup = (data) =>
+  $.ajax({
+    url: config.apiUrl + '/lineups/' + store.lineupId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+
 module.exports = {
-  indexContest,
-  indexLineup,
+  indexContests,
+  indexLineups,
   showContest,
   submitLineup,
-  createEntry
+  createEntry,
+  deleteLineup,
+  indexMyContests,
+  updateLineup
 }

@@ -8,7 +8,7 @@ const signUp = (data) =>
     data
   })
 
-const logIn = (data, event) =>
+const logIn = (data) =>
   $.ajax({
     url: config.apiUrl + '/sign-in',
     method: 'POST',
