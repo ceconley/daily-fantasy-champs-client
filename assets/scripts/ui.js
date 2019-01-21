@@ -2,9 +2,55 @@ const showAllContests = require('./../../contest-table.handlebars')
 const showAllLineups = require('./../../lineup-card.handlebars')
 const showOneContest = require('./../../contest-card.handlebars')
 const showMyContests = require('./../../own-contest-table.handlebars')
-
 const store = require('./store.js')
 const api = require('./api')
+
+// CREATE ACTIONS
+
+const onSubmitlineupSuccess = (response) => {
+  console.log(response)
+  store.lineup = response.lineup.id
+  $('#modalEnterLineup').modal('show')
+}
+
+const onSubmitlineupFailure = (error) => {
+  console.error(error)
+}
+
+const onCreateEntrySuccess = () => {
+  $('#modalEnterLineup').modal('hide')
+  $('#choose-lineup-view-div').hide()
+  $('#owned-contest-view-div').show()
+}
+
+const onCreateEntryFailure = (error) => {
+  console.error(error)
+}
+
+// UPDATE ACTIONS
+
+const onUpdatelineupSuccess = () => {
+  api.indexLineup()
+    .then(onIndexlineupsSuccess)
+    .catch(onIndexlineupsFailure)
+}
+const onUpdatelineupFailure = (error) => {
+  console.error(error)
+}
+
+// DELETE ACTIONS
+
+const onDeleteLineupSuccess = () => {
+  api.indexLineup()
+    .then(onIndexlineupsSuccess)
+    .catch(onIndexlineupsFailure)
+}
+const onDeleteLineupFailure = (error) => {
+  console.error(error)
+}
+
+// READ ACTIONS
+// INDEX
 
 const onIndexContestsSuccess = (response) => {
   console.log(response)
@@ -13,19 +59,8 @@ const onIndexContestsSuccess = (response) => {
   $('#contest-table').append(showContestsHtml)
 }
 
-const onIndexContestsFailure = () => {
-  console.error('error')
-}
-
-const onShowContestSuccess = (response) => {
-  console.log(response)
-  const showContestsHtml = showOneContest({ entries: response.entries })
-  $('#contestCardBody').empty()
-  $('#contestCardBody').append(showContestsHtml)
-}
-
-const onShowContestsFailure = () => {
-  console.error('error')
+const onIndexContestsFailure = (error) => {
+  console.error(error)
 }
 
 const onIndexlineupsSuccess = (response) => {
@@ -35,46 +70,8 @@ const onIndexlineupsSuccess = (response) => {
   $('#lineup-card').append(showLineupHtml)
 }
 
-const onIndexlineupsFailure = () => {
-  console.error('error')
-}
-
-const onSubmitlineupSuccess = (response) => {
-  console.log(response)
-  store.lineup = response.lineup.id
-  $('#modalEnterLineup').modal('show')
-}
-
-const onSubmitlineupFailure = () => {
-  console.error('error')
-}
-
-const onCreateEntrySuccess = () => {
-  $('#modalEnterLineup').modal('hide')
-  $('#choose-lineup-view-div').hide()
-  $('#owned-contest-view-div').show()
-}
-
-const onCreateEntryFailure = () => {
-  console.error('error')
-}
-
-const onDeleteLineupSuccess = () => {
-  api.indexLineup()
-    .then(onIndexlineupsSuccess)
-    .catch(onIndexlineupsFailure)
-}
-const onDeleteLineupFailure = () => {
-  console.error('error')
-}
-
-const onUpdatelineupSuccess = () => {
-  api.indexLineup()
-    .then(onIndexlineupsSuccess)
-    .catch(onIndexlineupsFailure)
-}
-const onUpdatelineupFailure = () => {
-  console.error('error')
+const onIndexlineupsFailure = (error) => {
+  console.error(error)
 }
 
 const onIndexMyContestsSuccess = (response) => {
@@ -83,8 +80,21 @@ const onIndexMyContestsSuccess = (response) => {
   $('#own-contests').empty()
   $('#own-contests').append(showContestsHtml)
 }
-const onIndexMyContestsFailure = () => {
-  console.error('error')
+const onIndexMyContestsFailure = (error) => {
+  console.error(error)
+}
+
+// Show
+
+const onShowContestSuccess = (response) => {
+  console.log(response)
+  const showContestsHtml = showOneContest({ entries: response.entries })
+  $('#contestCardBody').empty()
+  $('#contestCardBody').append(showContestsHtml)
+}
+
+const onShowContestsFailure = (error) => {
+  console.error(error)
 }
 
 module.exports = {

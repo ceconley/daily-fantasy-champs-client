@@ -2,6 +2,8 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store.js')
 
+// CREATE ACTIONS
+
 const onLineup1 = (event) => {
   event.preventDefault()
   const data = {lineup: {
@@ -68,6 +70,22 @@ const onLineup3 = (event) => {
     .then(ui.onSubmitlineupSuccess)
     .catch(ui.onSubmitlineupFailure)
 }
+
+const onEnterLineup = () => {
+  const user = store.user.email
+  const contest = store.contest
+  const lineup = store.lineup
+  const data = {entry: {
+    user_id: user,
+    contest_id: contest,
+    lineup_id: lineup
+  }}
+  api.createEntry(data)
+    .then(ui.onCreateEntrySuccess)
+    .catch(ui.onCreateEntryFailure)
+}
+
+// UPDATE ACTIONS
 
 const onUpdateLineup1 = (event) => {
   event.preventDefault()
@@ -145,17 +163,23 @@ const onUpdateLineup3 = (event) => {
     .catch(ui.onUpdatelineupFailure)
 }
 
+// DELETE ACTIONS
+
+const onDeleteLineup = (event) => {
+  console.log(event.target.id)
+  const data = event.target.id
+  api.deleteLineup(data)
+    .then(ui.onDeleteLineupSuccess)
+    .catch(ui.onDeleteLineupFailure)
+}
+
+// READ ACTIONS
+// INDEX
+
 const onIndexContests = () => {
   api.indexContests()
     .then(ui.onIndexContestsSuccess)
     .catch(ui.onIndexContestsFailure)
-}
-
-const onShowContest = (event) => {
-  store.contest = event.target.id
-  api.indexMyContests(event)
-    .then(ui.onShowContestSuccess)
-    .catch(ui.onShowContestFailure)
 }
 
 const onIndexMyConstests = () => {
@@ -170,33 +194,16 @@ const onIndexLineups = () => {
     .catch(ui.onIndexlineupsFailure)
 }
 
-const onEnterLineup = () => {
-  const user = store.user.email
-  const contest = store.contest
-  const lineup = store.lineup
-  const data = {entry: {
-    user_id: user,
-    contest_id: contest,
-    lineup_id: lineup
-  }}
-  api.createEntry(data)
-    .then(ui.onCreateEntrySuccess)
-    .catch(ui.onCreateEntryFailure)
+// SHOW
+
+const onShowContest = (event) => {
+  store.contest = event.target.id
+  api.indexMyContests(event)
+    .then(ui.onShowContestSuccess)
+    .catch(ui.onShowContestFailure)
 }
 
-// const onChangeLineup = () => {
-//   api.changeLineup(data)
-//     .then(ui.onChangeLineupSuccess)
-//     .catch(ui.onChangeLineupFailure)
-// }
-
-const onDeleteLineup = (event) => {
-  console.log(event.target.id)
-  const data = event.target.id
-  api.deleteLineup(data)
-    .then(ui.onDeleteLineupSuccess)
-    .catch(ui.onDeleteLineupFailure)
-}
+// VIEWS
 
 const onChooseLineup = (event) => {
   $('#available-contest-view-div').hide()
@@ -254,7 +261,6 @@ module.exports = {
   onLineup2,
   onLineup3,
   onEnterLineup,
-  // onChangeLineup,
   onDeleteLineup,
   changeLineupLink,
   onIndexMyConstests,
