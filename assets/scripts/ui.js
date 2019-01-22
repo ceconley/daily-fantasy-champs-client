@@ -7,13 +7,13 @@ const api = require('./api')
 
 // CREATE ACTIONS
 
-const onSubmitlineupSuccess = (response) => {
+const onCreatelineupSuccess = (response) => {
   console.log(response)
   store.lineup = response.lineup.id
   $('#modalEnterLineup').modal('show')
 }
 
-const onSubmitlineupFailure = (error) => {
+const onCreatelineupFailure = (error) => {
   console.error(error)
 }
 
@@ -30,7 +30,7 @@ const onCreateEntryFailure = (error) => {
 // UPDATE ACTIONS
 
 const onUpdatelineupSuccess = () => {
-  api.indexLineup()
+  api.indexLineups()
     .then(onIndexlineupsSuccess)
     .catch(onIndexlineupsFailure)
 }
@@ -41,7 +41,7 @@ const onUpdatelineupFailure = (error) => {
 // DELETE ACTIONS
 
 const onDeleteLineupSuccess = () => {
-  api.indexLineup()
+  api.indexLineups()
     .then(onIndexlineupsSuccess)
     .catch(onIndexlineupsFailure)
 }
@@ -65,7 +65,7 @@ const onIndexContestsFailure = (error) => {
 
 const onIndexlineupsSuccess = (response) => {
   console.log(response)
-  const showLineupHtml = showAllLineups({ lineups: response.lineups })
+  const showLineupHtml = showAllLineups({ entries: response.entries })
   $('#lineup-card').empty()
   $('#lineup-card').append(showLineupHtml)
 }
@@ -104,8 +104,8 @@ module.exports = {
   onIndexlineupsFailure,
   onShowContestSuccess,
   onShowContestsFailure,
-  onSubmitlineupSuccess,
-  onSubmitlineupFailure,
+  onCreatelineupSuccess,
+  onCreatelineupFailure,
   onCreateEntrySuccess,
   onCreateEntryFailure,
   onDeleteLineupSuccess,

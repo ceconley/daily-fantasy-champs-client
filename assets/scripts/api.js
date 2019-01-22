@@ -3,7 +3,7 @@ const store = require('./store.js')
 
 // CREATE ACTIONS
 
-const submitLineup = (data) =>
+const createLineup = (data) =>
   $.ajax({
     url: config.apiUrl + '/lineups',
     method: 'POST',
@@ -57,7 +57,7 @@ const indexContests = () =>
 
 const indexLineups = () =>
   $.ajax({
-    url: config.apiUrl + '/lineups',
+    url: config.apiUrl + '/entries',
     method: 'GET'
   })
 
@@ -82,7 +82,7 @@ module.exports = {
   indexContests,
   indexLineups,
   showContest,
-  submitLineup,
+  createLineup,
   createEntry,
   deleteLineup,
   indexMyContests,

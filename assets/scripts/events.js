@@ -21,9 +21,9 @@ const onLineup1 = (event) => {
   }
   store.lineup = null
   store.lineup = data
-  api.submitLineup(data)
-    .then(ui.onSubmitlineupSuccess)
-    .catch(ui.onSubmitlineupFailure)
+  api.createLineup(data)
+    .then(ui.onCreatelineupSuccess)
+    .catch(ui.onCreatelineupFailure)
 }
 
 const onLineup2 = (event) => {
@@ -44,9 +44,9 @@ const onLineup2 = (event) => {
   store.lineup = null
   store.lineup = data
   console.log(store.contest)
-  api.submitLineup(data)
-    .then(ui.onSubmitlineupSuccess)
-    .catch(ui.onSubmitlineupFailure)
+  api.createLineup(data)
+    .then(ui.onCreatelineupSuccess)
+    .catch(ui.onCreatelineupFailure)
 }
 
 const onLineup3 = (event) => {
@@ -66,20 +66,21 @@ const onLineup3 = (event) => {
   }
   store.lineup = null
   store.lineup = data
-  api.submitLineup(data)
-    .then(ui.onSubmitlineupSuccess)
-    .catch(ui.onSubmitlineupFailure)
+  api.createLineup(data)
+    .then(ui.onCreatelineupSuccess)
+    .catch(ui.onCreatelineupFailure)
 }
 
 const onEnterLineup = () => {
-  const user = store.user.email
-  const contest = store.contest
+  const user = store.user.id
+  const contest = parseInt(store.contest)
   const lineup = store.lineup
   const data = {entry: {
     user_id: user,
     contest_id: contest,
     lineup_id: lineup
   }}
+  console.log(data)
   api.createEntry(data)
     .then(ui.onCreateEntrySuccess)
     .catch(ui.onCreateEntryFailure)
@@ -198,6 +199,7 @@ const onIndexLineups = () => {
 
 const onShowContest = (event) => {
   store.contest = event.target.id
+  console.log(store.contest)
   api.indexMyContests(event)
     .then(ui.onShowContestSuccess)
     .catch(ui.onShowContestFailure)

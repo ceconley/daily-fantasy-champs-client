@@ -1,5 +1,5 @@
 <div class="each-lineup">
-  {{#each lineups as |lineup|}}
+  {{#each entries as |entry|}}
     <h5>Lineup: {{this.id}}</h5> 
     <a class="changeLineupLink" id="{{this.id}}">Change Lineup</a> | 
     <a class="delete-lineup" id="{{this.id}}">Delete</a>
@@ -13,39 +13,39 @@
       <tbody>
         <tr>
           <td>QB</td>
-          <td>{{this.qb}}</td>
+          <td>{{this.lineup.qb}}</td>
         </tr>
         <tr>
           <td>RB</td>
-          <td>{{this.rb1}}</td>
+          <td>{{this.lineup.rb1}}</td>
         </tr>
         <tr>
           <td>RB</td>
-          <td>{{this.rb2}}</td>
+          <td>{{this.lineup.rb2}}</td>
         </tr>
         <tr>
           <td>WR</td>
-          <td>{{this.wr1}}</td>
+          <td>{{this.lineup.wr1}}</td>
         </tr>
         <tr>
           <td>WR</td>
-          <td>{{this.wr2}}</td>
+          <td>{{this.lineup.wr2}}</td>
         </tr>
         <tr>
           <td>WR</td>
-          <td>{{this.wr3}}</td>
+          <td>{{this.lineup.wr3}}</td>
         </tr>
         <tr>
           <td>TE</td>
-          <td>{{this.te}}</td>
+          <td>{{this.lineup.te}}</td>
         </tr>
         <tr>
           <td>Flex</td>
-          <td>{{this.flex}}</td>
+          <td>{{this.lineup.flex}}</td>
         </tr>
         <tr>
           <td>DST</td>
-          <td>{{this.dst}}</td>
+          <td>{{this.lineup.dst}}</td>
         </tr>
       </tbody>
     </table>
