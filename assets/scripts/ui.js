@@ -1,7 +1,7 @@
-const showAllContests = require('./../../contest-table.handlebars')
-const showAllLineups = require('./../../lineup-card.handlebars')
-const showOneContest = require('./../../contest-card.handlebars')
-const showMyContests = require('./../../own-contest-table.handlebars')
+const showAllContests = require('./templates/contest-table.handlebars')
+const showAllLineups = require('./templates/lineup-card.handlebars')
+const showOneContest = require('./templates/contest-card.handlebars')
+const showMyContests = require('./templates/own-contest-table.handlebars')
 const store = require('./store.js')
 const api = require('./api')
 
@@ -9,8 +9,12 @@ const api = require('./api')
 
 const onCreatelineupSuccess = (response) => {
   console.log(response)
-  store.lineup = response.lineup.id
+  store.lineup = response.lineup
   $('#modalEnterLineup').modal('show')
+  onShowEntrySuccess()
+  // api.showEntry()
+  //   .then(onShowEntrySuccess)
+  //   .catch(onShowEntryFailure)
 }
 
 const onCreatelineupFailure = (error) => {
@@ -32,7 +36,7 @@ const onCreateEntryFailure = (error) => {
 
 const onCreateUpdatedLineupSuccess = (response) => {
   console.log(response.lineup.id)
-  store.lineup = response.lineup.id
+  store.lineup = response.lineup
   $('#modalEnterUpdatedLineup').modal('show')
 }
 
@@ -48,7 +52,8 @@ const onUpdateLineupSuccess = () => {
   $('#owned-contest-view-div').show()
   api.indexMyContests()
     .then(onIndexMyContestsSuccess)
-    .catch(onIndexMyContestsFailure)
+    .catch(
+      onIndexMyContestsFailure)
 }
 
 const onUpdateLineupFailure = (error) => {
@@ -81,8 +86,15 @@ const onIndexContestsFailure = (error) => {
 }
 
 const onIndexlineupsSuccess = (response) => {
-  console.log(response)
-  const showLineupHtml = showAllLineups({ entries: response.entries })
+  const entriesAll = response.entries
+  const ownerEntries = []
+  entriesAll.forEach(function (entry) {
+    if (entry.user.id === store.user.id) {
+      ownerEntries.push(entry)
+    }
+  })
+  console.log(ownerEntries)
+  const showLineupHtml = showAllLineups({ entries: ownerEntries })
   $('#lineup-card').empty()
   $('#lineup-card').append(showLineupHtml)
 }
@@ -92,8 +104,14 @@ const onIndexlineupsFailure = (error) => {
 }
 
 const onIndexMyContestsSuccess = (response) => {
-  console.log(response)
-  const showContestsHtml = showMyContests({ entries: response.entries })
+  const entriesAll = response.entries
+  const ownerEntries = []
+  entriesAll.forEach(function (entry) {
+    if (entry.user.id === store.user.id) {
+      ownerEntries.push(entry)
+    }
+  })
+  const showContestsHtml = showMyContests({ entries: ownerEntries })
   $('#own-contests').empty()
   $('#own-contests').append(showContestsHtml)
 }
@@ -111,6 +129,13 @@ const onShowContestSuccess = (response) => {
 }
 
 const onShowContestsFailure = (error) => {
+  console.error(error)
+}
+
+const onShowEntrySuccess = () => {
+  $('.entry-confirm').text(`${store.user.email} is entering ${store.lineup.qb}, ${store.lineup.rb1}, ${store.lineup.rb2}, ${store.lineup.wr1}, ${store.lineup.wr2}, ${store.lineup.wr3}, ${store.lineup.te}, ${store.lineup.flex}, ${store.lineup.dst}, in the ${store.contest.innerHTML} contest.`)
+}
+const onShowEntryFailure = (error) => {
   console.error(error)
 }
 
@@ -132,5 +157,7 @@ module.exports = {
   onCreateUpdatedLineupSuccess,
   onCreateUpdatedLineupFailure,
   onUpdateLineupSuccess,
-  onUpdateLineupFailure
+  onUpdateLineupFailure,
+  onShowEntrySuccess,
+  onShowEntryFailure
 }

@@ -70,8 +70,8 @@ const onLineup3 = (event) => {
 
 const onEnterLineup = () => {
   const user = store.user.id
-  const contest = parseInt(store.contest)
-  const lineup = store.lineup
+  const contest = parseInt(store.contest.id)
+  const lineup = store.lineup.id
   const data = {entry: {
     user_id: user,
     contest_id: contest,
@@ -156,8 +156,8 @@ const onEnterChangedLineup = () => {
   const data = {entry: {
     id: store.entryId,
     user_id: store.user.id,
-    contest_id: store.contest,
-    lineup_id: store.lineup
+    contest_id: store.contest.id,
+    lineup_id: store.lineup.id
   }
   }
   api.updateLineup(data)
@@ -199,7 +199,7 @@ const onIndexLineups = () => {
 // SHOW
 
 const onShowContest = (event) => {
-  store.contest = event.target.id
+  store.contest = event.target
   console.log(store.contest)
   api.indexMyContests(event)
     .then(ui.onShowContestSuccess)

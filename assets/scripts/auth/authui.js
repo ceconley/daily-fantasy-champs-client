@@ -20,6 +20,9 @@ const resetAuthForms = () => {
 const signUpSuccess = () => {
   // $('.authMessage').html('Signed Up Successfully')
   resetAuthForms()
+  $('#sign-up-view-div').hide()
+  $('#log-in-view-div').show()
+  $('#change-password-view-div').hide()
 }
 
 const signUpFailure = function () {
