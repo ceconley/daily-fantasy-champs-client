@@ -200,7 +200,6 @@ const onIndexLineups = () => {
 
 const onShowContest = (event) => {
   store.contest = event.target
-  console.log(store.contest)
   api.indexMyContests(event)
     .then(ui.onShowContestSuccess)
     .catch(ui.onShowContestFailure)
@@ -221,7 +220,6 @@ const changeLineupLink = (event) => {
   $('#choose-lineup-view-div').hide()
   $('#change-lineup-view-div').show()
   $('#lineups-view-div').hide()
-  console.log(event.target)
   store.entryId = $(event.target).data('entry-id')
   store.contestId = $(event.target).data('contest-id')
 }

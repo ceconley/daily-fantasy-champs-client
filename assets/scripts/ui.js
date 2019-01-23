@@ -122,8 +122,15 @@ const onIndexMyContestsFailure = (error) => {
 // Show
 
 const onShowContestSuccess = (response) => {
-  console.log(response)
-  const showContestsHtml = showOneContest({ entries: response.entries })
+  const entriesAll = response.entries
+  const contestEntries = []
+  const storeContestId = parseInt(store.contest.id)
+  entriesAll.forEach(function (entry) {
+    if (entry.contest.id === storeContestId) {
+      contestEntries.push(entry)
+    }
+  })
+  const showContestsHtml = showOneContest({ entries: contestEntries })
   $('#contestCardBody').empty()
   $('#contestCardBody').append(showContestsHtml)
 }
