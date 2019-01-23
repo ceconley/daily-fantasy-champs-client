@@ -28,4 +28,5 @@ $(() => {
   $('#update-lineup1').on('click', events.onUpdateLineup1)
   $('#update-lineup2').on('click', events.onUpdateLineup2)
   $('#update-lineup3').on('click', events.onUpdateLineup3)
+  $('#enter-updated-lineup').on('click', events.onEnterChangedLineup)
 })

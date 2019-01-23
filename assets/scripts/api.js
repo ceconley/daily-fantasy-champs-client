@@ -27,7 +27,7 @@ const createEntry = (data) =>
 
 const updateLineup = (data) =>
   $.ajax({
-    url: config.apiUrl + '/entries/' + store.lineupId,
+    url: config.apiUrl + '/entries/' + store.entryId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

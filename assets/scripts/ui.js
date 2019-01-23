@@ -21,20 +21,37 @@ const onCreateEntrySuccess = () => {
   $('#modalEnterLineup').modal('hide')
   $('#choose-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
+  api.indexMyContests()
+    .then(onIndexMyContestsSuccess)
+    .catch(onIndexMyContestsFailure)
 }
 
 const onCreateEntryFailure = (error) => {
   console.error(error)
 }
 
+const onCreateUpdatedLineupSuccess = (response) => {
+  console.log(response.lineup.id)
+  store.lineup = response.lineup.id
+  $('#modalEnterUpdatedLineup').modal('show')
+}
+
+const onCreateUpdatedLineupFailure = (error) => {
+  console.error(error)
+}
+
 // UPDATE ACTIONS
 
-const onUpdatelineupSuccess = () => {
-  api.indexLineups()
-    .then(onIndexlineupsSuccess)
-    .catch(onIndexlineupsFailure)
+const onUpdateLineupSuccess = () => {
+  $('#modalEnterUpdatedLineup').modal('hide')
+  $('#change-lineup-view-div').hide()
+  $('#owned-contest-view-div').show()
+  api.indexMyContests()
+    .then(onIndexMyContestsSuccess)
+    .catch(onIndexMyContestsFailure)
 }
-const onUpdatelineupFailure = (error) => {
+
+const onUpdateLineupFailure = (error) => {
   console.error(error)
 }
 
@@ -110,8 +127,10 @@ module.exports = {
   onCreateEntryFailure,
   onDeleteLineupSuccess,
   onDeleteLineupFailure,
-  onUpdatelineupSuccess,
-  onUpdatelineupFailure,
   onIndexMyContestsSuccess,
-  onIndexMyContestsFailure
+  onIndexMyContestsFailure,
+  onCreateUpdatedLineupSuccess,
+  onCreateUpdatedLineupFailure,
+  onUpdateLineupSuccess,
+  onUpdateLineupFailure
 }

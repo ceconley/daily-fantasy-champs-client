@@ -19,7 +19,6 @@ const onLineup1 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = null
   store.lineup = data
   api.createLineup(data)
     .then(ui.onCreatelineupSuccess)
@@ -41,7 +40,6 @@ const onLineup2 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = null
   store.lineup = data
   console.log(store.contest)
   api.createLineup(data)
@@ -64,7 +62,6 @@ const onLineup3 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = null
   store.lineup = data
   api.createLineup(data)
     .then(ui.onCreatelineupSuccess)
@@ -90,78 +87,82 @@ const onEnterLineup = () => {
 
 const onUpdateLineup1 = (event) => {
   event.preventDefault()
-  const data = {
-    user_id: store.user.id,
-    id: store.lineupId,
-    lineup: {
-      qb: 'Patrick Mahomes',
-      rb1: 'Sony Michel',
-      rb2: 'Damien Williams',
-      wr1: 'Julian Edelman',
-      wr2: 'Tyreek Hill',
-      wr3: 'Robert Woods',
-      te: 'Rob Gronkowski',
-      flex: 'C.J. Anderson',
-      dst: 'Rams',
-      score: 0.0
-    }
+  const data = {lineup: {
+    qb: 'Patrick Mahomes',
+    rb1: 'Sony Michel',
+    rb2: 'Damien Williams',
+    wr1: 'Julian Edelman',
+    wr2: 'Tyreek Hill',
+    wr3: 'Robert Woods',
+    te: 'Rob Gronkowski',
+    flex: 'C.J. Anderson',
+    dst: 'Rams',
+    score: 0.0
   }
-  store.lineup = null
-  store.lineup = data
-  api.updateLineup(data)
-    .then(ui.onUpdatelineupSuccess)
-    .catch(ui.onUpdatelineupFailure)
+  }
+  store.lineupId = data
+  api.createLineup(data)
+    .then(ui.onCreateUpdatedLineupSuccess)
+    .catch(ui.onCreateUpdatedLineupFailure)
 }
 
 const onUpdateLineup2 = (event) => {
   event.preventDefault()
-  const data = {
-    user_id: store.user.id,
-    id: store.lineupId,
-    lineup: {
-      qb: 'Tom Brady',
-      rb1: 'Todd Gurley',
-      rb2: 'Damien Williams',
-      wr1: 'Michael Thomas',
-      wr2: 'Tyreek Hill',
-      wr3: 'Josh Reynolds',
-      te: 'Gerald Everett',
-      flex: 'Ted Ginn Jr.',
-      dst: 'Saints',
-      score: 0.0
-    }
+  const data = {lineup: {
+    qb: 'Tom Brady',
+    rb1: 'Todd Gurley',
+    rb2: 'Damien Williams',
+    wr1: 'Michael Thomas',
+    wr2: 'Tyreek Hill',
+    wr3: 'Josh Reynolds',
+    te: 'Gerald Everett',
+    flex: 'Ted Ginn Jr.',
+    dst: 'Saints',
+    score: 0.0
   }
-  store.lineup = null
-  store.lineup = data
-  api.updateLineup(data)
-    .then(ui.onUpdatelineupSuccess)
-    .catch(ui.onUpdatelineupFailure)
+  }
+  store.lineupId = data
+  api.createLineup(data)
+    .then(ui.onCreateUpdatedLineupSuccess)
+    .catch(ui.onCreateUpdatedLineupFailure)
 }
 
 const onUpdateLineup3 = (event) => {
   event.preventDefault()
-  const data = {
-    user_id: store.user.id,
-    id: store.lineupId,
-    lineup: {
-      id: store.lineupId,
-      qb: 'Jared Goff',
-      rb1: 'Todd Gurley',
-      rb2: 'Alvin Kamara',
-      wr1: 'Michael Thomas',
-      wr2: 'Sammy Watkins',
-      wr3: 'Chris Hogan',
-      te: 'Travis Kelce',
-      flex: 'James White',
-      dst: 'Patriots',
-      score: 0.0
-    }
+  const data = {lineup: {
+    qb: 'Jared Goff',
+    rb1: 'Todd Gurley',
+    rb2: 'Alvin Kamara',
+    wr1: 'Michael Thomas',
+    wr2: 'Sammy Watkins',
+    wr3: 'Chris Hogan',
+    te: 'Travis Kelce',
+    flex: 'James White',
+    dst: 'Patriots',
+    score: 0.0
   }
-  store.lineup = null
-  store.lineup = data
+  }
+  store.lineupId = data
+  api.createLineup(data)
+    .then(ui.onCreateUpdatedLineupSuccess)
+    .catch(ui.onCreateUpdatedLineupFailure)
+}
+
+const onEnterChangedLineup = () => {
+  console.log(store.entryId)
+  console.log(store.user.id)
+  console.log(store.lineup)
+  console.log(store.contestId)
+  const data = {entry: {
+    id: store.entryId,
+    user_id: store.user.id,
+    contest_id: store.contest,
+    lineup_id: store.lineup
+  }
+  }
   api.updateLineup(data)
-    .then(ui.onUpdatelineupSuccess)
-    .catch(ui.onUpdatelineupFailure)
+    .then(ui.onUpdateLineupSuccess)
+    .catch(ui.onUpdateLineupFailure)
 }
 
 // DELETE ACTIONS
@@ -207,7 +208,7 @@ const onShowContest = (event) => {
 
 // VIEWS
 
-const onChooseLineup = (event) => {
+const onChooseLineup = () => {
   $('#available-contest-view-div').hide()
   $('#choose-lineup-view-div').show()
 }
@@ -220,8 +221,9 @@ const changeLineupLink = (event) => {
   $('#choose-lineup-view-div').hide()
   $('#change-lineup-view-div').show()
   $('#lineups-view-div').hide()
-  console.log(event.target.id)
-  store.lineupId = event.target.id
+  console.log(event.target)
+  store.entryId = $(event.target).data('entry-id')
+  store.contestId = $(event.target).data('contest-id')
 }
 
 const showMyLineups = () => {
@@ -233,7 +235,7 @@ const showMyLineups = () => {
   onIndexLineups()
 }
 
-const showMyContests = () => {
+const showMyContests = (event) => {
   $('#available-contest-view-div').hide()
   $('#lineups-view-div').hide()
   $('#owned-contest-view-div').show()
@@ -268,5 +270,6 @@ module.exports = {
   onIndexMyConstests,
   onUpdateLineup1,
   onUpdateLineup2,
-  onUpdateLineup3
+  onUpdateLineup3,
+  onEnterChangedLineup
 }
