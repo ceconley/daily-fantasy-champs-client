@@ -44,7 +44,7 @@ User Stories
 Wireframes
 public/wireframes.jpg
 
-![Pic of App](public/app-screen-shot.jpg "App")
+![Pic of App](./public/app-screen-shot.jpg "App")
 
 Installation Instructions
 •	Fork
