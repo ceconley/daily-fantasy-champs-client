@@ -44,6 +44,8 @@ User Stories
 Wireframes
 public/wireframes.jpg
 
+![Alt text](../public/app-screen-shot.jpg "App")
+
 Installation Instructions
 •	Fork
 •	Clone
