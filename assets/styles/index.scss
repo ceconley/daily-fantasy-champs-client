@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~toastr/build/toastr.css';
 
 #header-div {
   margin: 0;
@@ -29,4 +30,8 @@
 
 .changeLineupLink{
   cursor: pointer;
+}
+
+.message {
+  text-align: center;
 }

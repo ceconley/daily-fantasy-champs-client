@@ -1,4 +1,5 @@
 const store = require('../store.js')
+// const toastr = require('../toasts.js')
 
 $('.logged-in').hide()
 $('#sign-up-view-div').hide()
@@ -18,7 +19,7 @@ const resetAuthForms = () => {
 }
 
 const signUpSuccess = () => {
-  // $('.authMessage').html('Signed Up Successfully')
+  $('.message').text('Signed Up Successfully')
   resetAuthForms()
   $('#sign-up-view-div').hide()
   $('#log-in-view-div').show()
@@ -26,14 +27,13 @@ const signUpSuccess = () => {
 }
 
 const signUpFailure = function () {
-  console.error('error')
-  // $('.authMessage').html('Signed Up Failed')
+  $('.message').text('Signed Up Failed')
   resetAuthForms()
 }
 
 const logInSuccess = function (data) {
   store.user = data.user
-  // $('.authMessage').html('Signed In Successfully')
+  $('.message').text('Logged In Successfully')
   resetAuthForms()
   $('.logged-in').show()
   $('.logged-out').hide()
@@ -43,22 +43,22 @@ const logInSuccess = function (data) {
 }
 
 const logInFailure = function () {
-  // $('.authMessage').html('Signed In Failed')
+  $('.message').text('Log In Failed')
   resetAuthForms()
 }
 
 const changePasswordSuccess = function () {
-  // $('.authMessage').html('Password changed successfully')
+  $('.message').text('Password changed successfully')
   resetAuthForms()
 }
 
 const changePasswordFailure = function () {
-  // $('.authMessage').html('Error on password change')
+  $('.message').text('Error on password change')
   resetAuthForms()
 }
 
 const logOutSuccess = function () {
-  // $('.authMessage').html('Signed Out Successfully')
+  $('.message').text('Logged Out Successfully')
   store.user = null
   resetAuthForms()
   $('.logged-in').hide()
@@ -76,7 +76,7 @@ const logOutSuccess = function () {
 
 const logOutFailure = function () {
   resetAuthForms()
-  // $('.authMessage').html('Signed Out Failed')
+  $('.message').text('Log Out Failed')
 }
 
 module.exports = {
