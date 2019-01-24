@@ -44,7 +44,7 @@ User Stories
 Wireframes
 public/wireframes.jpg
 
-![Pic of App](./public/app-screen-shot.jpg "App")
+![Pic of App](https://github.com/ceconley/daily-fantasy-champs-client/blob/master/public/app-screen-shot.png "App")
 
 Installation Instructions
 •	Fork
