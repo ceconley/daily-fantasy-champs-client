@@ -8,13 +8,9 @@ const api = require('./api')
 // CREATE ACTIONS
 
 const onCreatelineupSuccess = (response) => {
-  console.log(response)
   store.lineup = response.lineup
   $('#modalEnterLineup').modal('show')
   onShowEntrySuccess()
-  // api.showEntry()
-  //   .then(onShowEntrySuccess)
-  //   .catch(onShowEntryFailure)
 }
 
 const onCreatelineupFailure = (error) => {
@@ -35,7 +31,6 @@ const onCreateEntryFailure = (error) => {
 }
 
 const onCreateUpdatedLineupSuccess = (response) => {
-  console.log(response.lineup.id)
   store.lineup = response.lineup
   $('#modalEnterUpdatedLineup').modal('show')
 }
@@ -52,8 +47,7 @@ const onUpdateLineupSuccess = () => {
   $('#owned-contest-view-div').show()
   api.indexMyContests()
     .then(onIndexMyContestsSuccess)
-    .catch(
-      onIndexMyContestsFailure)
+    .catch(onIndexMyContestsFailure)
 }
 
 const onUpdateLineupFailure = (error) => {
@@ -75,7 +69,6 @@ const onDeleteLineupFailure = (error) => {
 // INDEX
 
 const onIndexContestsSuccess = (response) => {
-  console.log(response)
   const showContestsHtml = showAllContests({ contests: response.contests })
   $('#contest-table').empty()
   $('#contest-table').append(showContestsHtml)
@@ -93,7 +86,6 @@ const onIndexlineupsSuccess = (response) => {
       ownerEntries.push(entry)
     }
   })
-  console.log(ownerEntries)
   const showLineupHtml = showAllLineups({ entries: ownerEntries })
   $('#lineup-card').empty()
   $('#lineup-card').append(showLineupHtml)
@@ -115,6 +107,7 @@ const onIndexMyContestsSuccess = (response) => {
   $('#own-contests').empty()
   $('#own-contests').append(showContestsHtml)
 }
+
 const onIndexMyContestsFailure = (error) => {
   console.error(error)
 }
@@ -130,9 +123,20 @@ const onShowContestSuccess = (response) => {
       contestEntries.push(entry)
     }
   })
+  console.log(contestEntries)
   const showContestsHtml = showOneContest({ entries: contestEntries })
   $('#contestCardBody').empty()
   $('#contestCardBody').append(showContestsHtml)
+  const contestUsers = contestEntries.map(function (entry) {
+    return entry.user.id
+  })
+  console.log(store.user.id)
+  console.log(contestUsers)
+  console.log(contestUsers.includes(store.user.id))
+  if (contestUsers.includes(store.user.id) === true) {
+    $('#join-contest').hide()
+    $('#contest-card-message').text('You are already entered in this contest')
+  }
 }
 
 const onShowContestsFailure = (error) => {

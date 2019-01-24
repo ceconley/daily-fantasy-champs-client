@@ -41,7 +41,6 @@ const onLineup2 = (event) => {
   }
   }
   store.lineup = data
-  console.log(store.contest)
   api.createLineup(data)
     .then(ui.onCreatelineupSuccess)
     .catch(ui.onCreatelineupFailure)
@@ -77,7 +76,6 @@ const onEnterLineup = () => {
     contest_id: contest,
     lineup_id: lineup
   }}
-  console.log(data)
   api.createEntry(data)
     .then(ui.onCreateEntrySuccess)
     .catch(ui.onCreateEntryFailure)
@@ -149,10 +147,6 @@ const onUpdateLineup3 = (event) => {
 }
 
 const onEnterChangedLineup = () => {
-  console.log(store.entryId)
-  console.log(store.user.id)
-  console.log(store.lineup)
-  console.log(store.contestId)
   const data = {entry: {
     id: store.entryId,
     user_id: store.user.id,
@@ -168,7 +162,6 @@ const onEnterChangedLineup = () => {
 // DELETE ACTIONS
 
 const onDeleteLineup = (event) => {
-  console.log(event.target.id)
   const data = event.target.id
   api.deleteLineup(data)
     .then(ui.onDeleteLineupSuccess)

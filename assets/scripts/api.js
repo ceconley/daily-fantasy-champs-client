@@ -78,12 +78,6 @@ const showContest = (event) =>
     method: 'GET'
   })
 
-// const showEntry = (event) =>
-//   $.ajax({
-//     url: config.apiUrl + '/entries/' + event.target.id,
-//     method: 'GET'
-//   })
-
 module.exports = {
   indexContests,
   indexLineups,
@@ -93,5 +87,4 @@ module.exports = {
   deleteLineup,
   indexMyContests,
   updateLineup
-  // showEntry
 }
