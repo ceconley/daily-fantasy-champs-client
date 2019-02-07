@@ -23,9 +23,9 @@ const onCreateEntrySuccess = () => {
   $('#choose-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
   $('.message').text('Lineup entered successfully')
-  api.indexMyContests()
-    .then(onIndexMyContestsSuccess)
-    .catch(onIndexMyContestsFailure)
+  api.indexEntries()
+    .then(onIndexContestForCountSuccess)
+    .catch(onIndexContestForCountFailure)
 }
 
 const onCreateEntryFailure = () => {
@@ -41,34 +41,6 @@ const onCreateUpdatedLineupFailure = () => {
   $('.message').text('Failed to save lineup')
 }
 
-// UPDATE ACTIONS
-
-const onUpdateLineupSuccess = () => {
-  $('#modalEnterUpdatedLineup').modal('hide')
-  $('#change-lineup-view-div').hide()
-  $('#owned-contest-view-div').show()
-  $('.message').text('Lineup updated')
-  api.indexMyContests()
-    .then(onIndexMyContestsSuccess)
-    .catch(onIndexMyContestsFailure)
-}
-
-const onUpdateLineupFailure = () => {
-  $('.message').text('Lineup did not update')
-}
-
-// DELETE ACTIONS
-
-const onDeleteLineupSuccess = () => {
-  $('.message').text('Entry deleted')
-  api.indexLineups()
-    .then(onIndexlineupsSuccess)
-    .catch(onIndexlineupsFailure)
-}
-const onDeleteLineupFailure = () => {
-  $('.message').text('Failure deleting Entry')
-}
-
 // READ ACTIONS
 // INDEX
 
@@ -80,6 +52,43 @@ const onIndexContestsSuccess = (response) => {
 
 const onIndexContestsFailure = () => {
   $('.message').text('Failed to find contests')
+}
+
+const onIndexMyContestsSuccess = (response) => {
+  const entriesAll = response.entries
+  const ownerEntries = []
+  entriesAll.forEach((entry) => {
+    if (entry.user.id === store.user.id) {
+      ownerEntries.push(entry)
+    }
+  })
+  const showContestsHtml = showMyContests({ entries: ownerEntries })
+  $('#own-contests').empty()
+  $('#own-contests').append(showContestsHtml)
+}
+
+const onIndexMyContestsFailure = () => {
+  $('.message').text('Failed to find your contests')
+}
+
+const onIndexContestForCountSuccess = (response) => {
+  const entriesAll = response.entries
+  const contestEntries = []
+  const storeContestId = parseInt(store.contest.id)
+  entriesAll.forEach((entry) => {
+    if (entry.contest.id === storeContestId) {
+      contestEntries.push(entry)
+    }
+  })
+  const data = {contest: {'entrants_current': contestEntries.length}}
+  console.log(data)
+  api.updateContest(data)
+    .then(onUpdateContestSuccess)
+    .catch(onUpdateContestFailure)
+}
+
+const onIndexContestForCountFailure = () => {
+  $('.message').text('Failed to find your contests')
 }
 
 const onIndexlineupsSuccess = (response) => {
@@ -97,23 +106,6 @@ const onIndexlineupsSuccess = (response) => {
 
 const onIndexlineupsFailure = () => {
   $('.message').text('Failed to find lineups')
-}
-
-const onIndexMyContestsSuccess = (response) => {
-  const entriesAll = response.entries
-  const ownerEntries = []
-  entriesAll.forEach(function (entry) {
-    if (entry.user.id === store.user.id) {
-      ownerEntries.push(entry)
-    }
-  })
-  const showContestsHtml = showMyContests({ entries: ownerEntries })
-  $('#own-contests').empty()
-  $('#own-contests').append(showContestsHtml)
-}
-
-const onIndexMyContestsFailure = () => {
-  $('.message').text('Failed to find your contests')
 }
 
 // Show
@@ -150,25 +142,70 @@ const onShowEntryFailure = () => {
   $('.message').text('Failed getting entry')
 }
 
+// UPDATE ACTIONS
+
+const onUpdateLineupSuccess = () => {
+  $('#modalEnterUpdatedLineup').modal('hide')
+  $('#change-lineup-view-div').hide()
+  $('#owned-contest-view-div').show()
+  $('.message').text('Lineup updated')
+  api.indexContests()
+    .then(onIndexMyContestsSuccess)
+    .catch(onIndexMyContestsFailure)
+}
+
+const onUpdateLineupFailure = () => {
+  $('.message').text('Lineup did not update')
+}
+
+const onUpdateContestSuccess = () => {
+  api.indexEntries()
+    .then(onIndexMyContestsSuccess)
+    .catch(onIndexMyContestsFailure)
+}
+
+const onUpdateContestFailure = () => {
+  $('.message').text('Contest did not update')
+}
+
+// DELETE ACTIONS
+
+const onDeleteEntrySuccess = () => {
+  $('.message').text('Entry deleted')
+  $('#lineups-view-div').hide()
+  $('#owned-contest-view-div').show()
+  api.indexEntries()
+    .then(onIndexContestForCountSuccess)
+    .catch(onIndexContestForCountFailure)
+}
+
+const onDeleteEntryFailure = () => {
+  $('.message').text('Failure deleting Entry')
+}
+
 module.exports = {
-  onIndexContestsSuccess,
-  onIndexContestsFailure,
-  onIndexlineupsSuccess,
-  onIndexlineupsFailure,
-  onShowContestSuccess,
-  onShowContestsFailure,
+  onCreateUpdatedLineupSuccess,
+  onCreateUpdatedLineupFailure,
   onCreatelineupSuccess,
   onCreatelineupFailure,
   onCreateEntrySuccess,
   onCreateEntryFailure,
-  onDeleteLineupSuccess,
-  onDeleteLineupFailure,
+  onIndexContestsSuccess,
+  onIndexContestsFailure,
   onIndexMyContestsSuccess,
   onIndexMyContestsFailure,
-  onCreateUpdatedLineupSuccess,
-  onCreateUpdatedLineupFailure,
+  onIndexContestForCountSuccess,
+  onIndexContestForCountFailure,
+  onIndexlineupsSuccess,
+  onIndexlineupsFailure,
+  onShowEntrySuccess,
+  onShowEntryFailure,
+  onShowContestSuccess,
+  onShowContestsFailure,
   onUpdateLineupSuccess,
   onUpdateLineupFailure,
-  onShowEntrySuccess,
-  onShowEntryFailure
+  onUpdateContestSuccess,
+  onUpdateContestFailure,
+  onDeleteEntrySuccess,
+  onDeleteEntryFailure
 }

@@ -27,6 +27,8 @@ const showChangePassword = () => {
 const closeChangePassword = () => {
   $('#change-password-view-div').hide()
   $('#available-contest-view-div').show()
+  $('.nav-bar').show()
+  $('.message').text('')
 }
 
 const onSignUp = (event) => {

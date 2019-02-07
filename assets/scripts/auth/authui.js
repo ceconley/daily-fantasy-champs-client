@@ -49,6 +49,9 @@ const logInFailure = function () {
 
 const changePasswordSuccess = function () {
   $('.message').text('Password changed successfully')
+  $('#change-password-view-div').hide()
+  $('#available-contest-view-div').show()
+  $('.nav-bar').show()
   resetAuthForms()
 }
 

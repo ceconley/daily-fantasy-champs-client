@@ -23,6 +23,29 @@ const createEntry = (data) =>
     data
   })
 
+// READ ACTIONS
+// INDEX
+
+const indexContests = () =>
+  $.ajax({
+    url: config.apiUrl + '/contests',
+    method: 'GET'
+  })
+
+const indexEntries = () =>
+  $.ajax({
+    url: config.apiUrl + '/entries',
+    method: 'GET'
+  })
+
+// Show
+
+const showContest = (event) =>
+  $.ajax({
+    url: config.apiUrl + '/contests/' + event.target.id,
+    method: 'GET'
+  })
+
 // UPDATE ACTIONS
 
 const updateLineup = (data) =>
@@ -35,9 +58,19 @@ const updateLineup = (data) =>
     data
   })
 
+const updateContest = (data) =>
+  $.ajax({
+    url: config.apiUrl + '/contests/2',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+
 // DELETE ACTIONS
 
-const deleteLineup = (data) =>
+const deleteEntry = (data) =>
   $.ajax({
     url: config.apiUrl + '/entries/' + data,
     method: 'DELETE',
@@ -46,45 +79,13 @@ const deleteLineup = (data) =>
     }
   })
 
-// READ ACTIONS
-// INDEX
-
-const indexContests = () =>
-  $.ajax({
-    url: config.apiUrl + '/contests',
-    method: 'GET'
-  })
-
-const indexLineups = () =>
-  $.ajax({
-    url: config.apiUrl + '/entries',
-    method: 'GET'
-  })
-
-const indexMyContests = () =>
-  $.ajax({
-    url: config.apiUrl + '/entries',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-
-// Show
-
-const showContest = (event) =>
-  $.ajax({
-    url: config.apiUrl + '/contests/' + event.target.id,
-    method: 'GET'
-  })
-
 module.exports = {
-  indexContests,
-  indexLineups,
-  showContest,
   createLineup,
   createEntry,
-  deleteLineup,
-  indexMyContests,
-  updateLineup
+  indexContests,
+  indexEntries,
+  showContest,
+  updateLineup,
+  updateContest,
+  deleteEntry
 }

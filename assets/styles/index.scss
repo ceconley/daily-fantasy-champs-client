@@ -1,21 +1,29 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~toastr/build/toastr.css';
+// @import '~toastr/build/toastr.css';
 
-#header-div {
-  margin: 0;
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
 }
 
 .authlinks { 
   display: inline;
 }
 
-.link {
-  cursor: pointer;
+#available-contest-row {
+  display: flex;
+  justify-content: center;
 }
 
-.nav-bar {
-  display: flex;
-  justify-content: space-around;
+body {
+  background-image: url('public/football-background1.jpg');
+  background-size: cover;
+  color: white;
+}
+
+.changeLineupLink{
+  cursor: pointer;
 }
 
 .contest-name:hover {
@@ -24,14 +32,53 @@
   color: blue;
 }
 
+// .has-table {
+//   background-color: black;
+//   color: white;
+//   margin: 0;
+//   padding: 0;
+// }
+
 .delete-lineup {
   cursor: pointer;
 }
 
-.changeLineupLink{
+.each-lineup {
+  display: flex;
+}
+
+#header-div {
+  margin: 0;
+}
+
+h3 {
+  text-align: center;
+}
+
+input {
+  background-color: black;
+  color: white;
+}
+
+.lineup-table {
+  margin: 15px;
+}
+
+.link {
   cursor: pointer;
 }
 
 .message {
   text-align: center;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-around;
+  margin: 35px;
+  font-size: 18pt;
+}
+
+table {
+  background-color: black;
 }

@@ -4,7 +4,7 @@ const store = require('./store.js')
 
 // CREATE ACTIONS
 
-const onLineup1 = (event) => {
+const onCreateLineup1 = (event) => {
   event.preventDefault()
   const data = {lineup: {
     qb: 'Patrick Mahomes',
@@ -25,7 +25,7 @@ const onLineup1 = (event) => {
     .catch(ui.onCreatelineupFailure)
 }
 
-const onLineup2 = (event) => {
+const onCreateLineup2 = (event) => {
   event.preventDefault()
   const data = {lineup: {
     qb: 'Tom Brady',
@@ -46,7 +46,7 @@ const onLineup2 = (event) => {
     .catch(ui.onCreatelineupFailure)
 }
 
-const onLineup3 = (event) => {
+const onCreateLineup3 = (event) => {
   event.preventDefault()
   const data = {lineup: {
     qb: 'Jared Goff',
@@ -67,7 +67,7 @@ const onLineup3 = (event) => {
     .catch(ui.onCreatelineupFailure)
 }
 
-const onEnterLineup = () => {
+const onCreateEntry = () => {
   const user = store.user.id
   const contest = parseInt(store.contest.id)
   const lineup = store.lineup.id
@@ -79,6 +79,37 @@ const onEnterLineup = () => {
   api.createEntry(data)
     .then(ui.onCreateEntrySuccess)
     .catch(ui.onCreateEntryFailure)
+}
+
+// READ ACTIONS
+// INDEX
+
+const onIndexContests = () => {
+  api.indexContests()
+    .then(ui.onIndexContestsSuccess)
+    .catch(ui.onIndexContestsFailure)
+}
+
+const onIndexMyConstests = () => {
+  api.indexEntries()
+    .then(ui.onIndexMyContestsSuccess)
+    .catch(ui.onIndexMyContestsFailure)
+}
+
+const onIndexLineups = () => {
+  api.indexEntries()
+    .then(ui.onIndexlineupsSuccess)
+    .catch(ui.onIndexlineupsFailure)
+}
+
+// SHOW
+
+const onShowContest = (event) => {
+  console.log(event.target)
+  store.contest = event.target
+  api.indexEntries(event)
+    .then(ui.onShowContestSuccess)
+    .catch(ui.onShowContestFailure)
 }
 
 // UPDATE ACTIONS
@@ -146,7 +177,7 @@ const onUpdateLineup3 = (event) => {
     .catch(ui.onCreateUpdatedLineupFailure)
 }
 
-const onEnterChangedLineup = () => {
+const onUpdateChangedLineup = () => {
   const data = {entry: {
     id: store.entryId,
     user_id: store.user.id,
@@ -160,42 +191,14 @@ const onEnterChangedLineup = () => {
 }
 
 // DELETE ACTIONS
-
-const onDeleteLineup = (event) => {
-  const data = event.target.id
-  api.deleteLineup(data)
-    .then(ui.onDeleteLineupSuccess)
-    .catch(ui.onDeleteLineupFailure)
-}
-
-// READ ACTIONS
-// INDEX
-
-const onIndexContests = () => {
-  api.indexContests()
-    .then(ui.onIndexContestsSuccess)
-    .catch(ui.onIndexContestsFailure)
-}
-
-const onIndexMyConstests = () => {
-  api.indexMyContests()
-    .then(ui.onIndexMyContestsSuccess)
-    .catch(ui.onIndexMyContestsFailure)
-}
-
-const onIndexLineups = () => {
-  api.indexLineups()
-    .then(ui.onIndexlineupsSuccess)
-    .catch(ui.onIndexlineupsFailure)
-}
-
-// SHOW
-
-const onShowContest = (event) => {
-  store.contest = event.target
-  api.indexMyContests(event)
-    .then(ui.onShowContestSuccess)
-    .catch(ui.onShowContestFailure)
+const onDeleteEntry = (event) => {
+  // store.contestId = $(event.target).data('contest')
+  // console.log(store.contestId)
+  // const data = event.target.id
+  api.indexEntries(data)
+    .then(ui.onIndexContestForCountSuccess)
+    .then()
+    .catch(ui.onIndexContestForCountFailure)
 }
 
 // VIEWS
@@ -244,23 +247,51 @@ const showAvailableContests = (event) => {
   onIndexContests(event)
 }
 
+const currentEntrantsCount = () => {
+  const contestEntries = []
+  const storeContestId = parseInt(store.contest.id)
+  entriesAll.forEach((entry) => {
+    if (entry.contest.id === storeContestId) {
+      contestEntries.push(entry)
+    }
+  })
+  const data = {contest: {'entrants_current': contestEntries.length}}
+  console.log(data)
+}
+
+// const onIndexContestForCountSuccess = (response) => {
+//   const entriesAll = response.entries
+//   const contestEntries = []
+//   const storeContestId = parseInt(store.contest.id)
+//   entriesAll.forEach((entry) => {
+//     if (entry.contest.id === storeContestId) {
+//       contestEntries.push(entry)
+//     }
+//   })
+//   const data = {contest: {'entrants_current': contestEntries.length}}
+//   console.log(data)
+//   api.updateContest(data)
+//     .then(onUpdateContestSuccess)
+//     .catch(onUpdateContestFailure)
+// }
+
 module.exports = {
-  showMyLineups,
-  showMyContests,
-  showAvailableContests,
+  onCreateLineup1,
+  onCreateLineup2,
+  onCreateLineup3,
+  onCreateEntry,
   onIndexContests,
   onIndexLineups,
   onShowContest,
-  onChooseLineup,
-  onLineup1,
-  onLineup2,
-  onLineup3,
-  onEnterLineup,
-  onDeleteLineup,
-  changeLineupLink,
   onIndexMyConstests,
   onUpdateLineup1,
   onUpdateLineup2,
   onUpdateLineup3,
-  onEnterChangedLineup
+  onUpdateChangedLineup,
+  onDeleteEntry,
+  onChooseLineup,
+  changeLineupLink,
+  showMyLineups,
+  showMyContests,
+  showAvailableContests
 }
