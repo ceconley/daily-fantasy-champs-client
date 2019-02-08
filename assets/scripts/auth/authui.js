@@ -10,7 +10,7 @@ $('#owned-contest-view-div').hide()
 $('#individual-contest-view-div').hide()
 $('#choose-lineup-view-div').hide()
 $('#change-lineup-view-div').hide()
-$('.nav-bar').hide()
+$('.navbar').hide()
 
 const resetAuthForms = () => {
   $('#sign-up')[0].reset()
@@ -39,7 +39,7 @@ const logInSuccess = function (data) {
   $('.logged-out').hide()
   $('#log-in-view-div').hide()
   $('#available-contest-view-div').show()
-  $('.nav-bar').show()
+  $('.navbar').show()
 }
 
 const logInFailure = function () {
@@ -51,7 +51,7 @@ const changePasswordSuccess = function () {
   $('.message').text('Password changed successfully')
   $('#change-password-view-div').hide()
   $('#available-contest-view-div').show()
-  $('.nav-bar').show()
+  $('.navbar').show()
   resetAuthForms()
 }
 
@@ -74,7 +74,7 @@ const logOutSuccess = function () {
   $('#owned-contest-view-div').hide()
   $('#individual-contest-view-div').hide()
   $('#choose-lineup-view-div').hide()
-  $('.nav-bar').hide()
+  $('.navbar').hide()
 }
 
 const logOutFailure = function () {

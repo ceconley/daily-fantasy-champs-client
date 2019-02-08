@@ -16,7 +16,25 @@
       <tr class="contest-row">
         <td>{{this.contest.id}}</td>
         <td class="contest-name" id="{{this.contest.id}}" data-entry-id="{{this.id}}" data-toggle="modal" data-target="#modalContestCard">{{this.contest.name}}</td>
-        <td>{{this.lineup.qb}}, {{this.lineup.rb1}}, {{this.lineup.rb2}}, {{this.lineup.wr1}}, {{this.lineup.wr2}}, {{this.lineup.wr3}}, {{this.lineup.te}}, {{this.lineup.flex}}, {{this.lineup.dst}}</td>
+        <td>
+          <table class="table-bordered">
+            <tr>
+              <td>{{this.lineup.qb}}</td>
+              <td>{{this.lineup.wr1}}</td>
+              <td>{{this.lineup.te}}</td>
+            </tr>
+            <tr>
+              <td>{{this.lineup.rb1}}</td>
+              <td>{{this.lineup.wr2}}</td>
+              <td>{{this.lineup.flex}}</td>
+            </tr>
+            <tr>
+              <td>{{this.lineup.rb2}}</td>
+              <td>{{this.lineup.wr3}}</td>
+              <td>{{this.lineup.dst}}</td>
+            </tr>
+          </table>
+        </td>
         <td>{{this.contest.entrants_current}}/{{this.contest.entrants_total}}</td>
         <td>{{this.contest.winner}}</td>
       {{/each}}

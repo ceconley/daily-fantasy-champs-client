@@ -9,6 +9,7 @@ a:hover {
 
 .authlinks { 
   display: inline;
+  align-self: flex-end;
 }
 
 #available-contest-row {
@@ -19,11 +20,28 @@ a:hover {
 body {
   background-image: url('public/football-background1.jpg');
   background-size: cover;
-  color: white;
+  color: #C0C0C0;
+}
+
+button {
+  background-color: #C0C0C0;
+  cursor: pointer;
+  border-radius: 6pt;
+  padding: 7px;
+  margin: 20px;
 }
 
 .changeLineupLink{
   cursor: pointer;
+}
+
+.choose-lineup-div {
+  display: flex;
+}
+
+
+.close {
+  color: white;
 }
 
 .contest-name:hover {
@@ -31,13 +49,6 @@ body {
   cursor: pointer;
   color: blue;
 }
-
-// .has-table {
-//   background-color: black;
-//   color: white;
-//   margin: 0;
-//   padding: 0;
-// }
 
 .delete-lineup {
   cursor: pointer;
@@ -58,10 +69,24 @@ h3 {
 input {
   background-color: black;
   color: white;
+  border-radius: 6pt; 
+}
+
+.lineup-create {
+  margin: 15px;
 }
 
 .lineup-table {
   margin: 15px;
+}
+
+.lineup-update {
+  margin: 15px;
+}
+
+#lineups-view-row {
+  display: flex;
+  justify-content: center;
 }
 
 .link {
@@ -72,13 +97,30 @@ input {
   text-align: center;
 }
 
-.nav-bar {
-  display: flex;
-  justify-content: space-around;
-  margin: 35px;
-  font-size: 18pt;
+.modal-content {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 6pt;
 }
 
-table {
+.navbar {
+  display: flex;
+  justify-content: center;
+  margin: 35px;
+  font-size: 16pt;
+}
+
+#owned-contest-row {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
   background-color: black;
+  border-radius: 6pt;
 }

@@ -195,7 +195,7 @@ const onDeleteEntry = (event) => {
   // store.contestId = $(event.target).data('contest')
   // console.log(store.contestId)
   // const data = event.target.id
-  api.indexEntries(data)
+  api.indexEntries()
     .then(ui.onIndexContestForCountSuccess)
     .then()
     .catch(ui.onIndexContestForCountFailure)
@@ -247,33 +247,9 @@ const showAvailableContests = (event) => {
   onIndexContests(event)
 }
 
-const currentEntrantsCount = () => {
-  const contestEntries = []
-  const storeContestId = parseInt(store.contest.id)
-  entriesAll.forEach((entry) => {
-    if (entry.contest.id === storeContestId) {
-      contestEntries.push(entry)
-    }
-  })
-  const data = {contest: {'entrants_current': contestEntries.length}}
-  console.log(data)
-}
-
-// const onIndexContestForCountSuccess = (response) => {
-//   const entriesAll = response.entries
-//   const contestEntries = []
-//   const storeContestId = parseInt(store.contest.id)
-//   entriesAll.forEach((entry) => {
-//     if (entry.contest.id === storeContestId) {
-//       contestEntries.push(entry)
-//     }
-//   })
-//   const data = {contest: {'entrants_current': contestEntries.length}}
-//   console.log(data)
-//   api.updateContest(data)
-//     .then(onUpdateContestSuccess)
-//     .catch(onUpdateContestFailure)
-// }
+// const entriesAll = store.entries
+// const contestEntries = entriesAll.filter(entry => entry.contest.id === storeContestId)
+// const data = {contest: {'entrants_current': contestEntries.length}}
 
 module.exports = {
   onCreateLineup1,
