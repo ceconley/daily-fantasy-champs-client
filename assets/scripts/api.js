@@ -42,7 +42,7 @@ const indexEntries = () =>
 
 const showContest = (event) =>
   $.ajax({
-    url: config.apiUrl + '/contests/' + event.target.id,
+    url: config.apiUrl + `/contests/${event.target.id}`,
     method: 'GET'
   })
 
@@ -50,7 +50,7 @@ const showContest = (event) =>
 
 const updateLineup = (data) =>
   $.ajax({
-    url: config.apiUrl + '/entries/' + store.entryId,
+    url: config.apiUrl + `/entries/${store.entryId}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -60,7 +60,7 @@ const updateLineup = (data) =>
 
 const updateContest = (data) =>
   $.ajax({
-    url: config.apiUrl + '/contests/2',
+    url: config.apiUrl + `/contests/${store.contestId}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -72,7 +72,7 @@ const updateContest = (data) =>
 
 const deleteEntry = (data) =>
   $.ajax({
-    url: config.apiUrl + '/entries/' + data,
+    url: config.apiUrl + `/entries/${store.entryId}`,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token

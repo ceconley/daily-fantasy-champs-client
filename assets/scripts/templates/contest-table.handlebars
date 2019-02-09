@@ -2,7 +2,6 @@
   <table id="contest" class="table">
     <thead>
       <tr id="header-row">
-        <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Max Number of Entrants</th>
         <th scope="col">Current Number of Entrants</th>
@@ -14,7 +13,6 @@
     <tbody>
       {{#each contests as |contest|}}
       <tr class="contest-row">
-        <td>{{this.id}}</td>
         <td class="contest-name" id="{{this.id}}" data-toggle="modal"
             data-target="#modalContestCard">{{this.name}}</td>
         <td>{{this.entrants_total}}</td>

@@ -23,9 +23,9 @@ const onCreateEntrySuccess = () => {
   $('#choose-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
   $('.message').text('Lineup entered successfully')
-  api.indexEntries()
-    .then(onIndexContestForCountSuccess)
-    .catch(onIndexContestForCountFailure)
+  // api.indexEntries()
+  // .then(onIndexContestForCountSuccess)
+  // .catch(onIndexContestForCountFailure)
 }
 
 const onCreateEntryFailure = () => {
@@ -71,35 +71,30 @@ const onIndexMyContestsFailure = () => {
   $('.message').text('Failed to find your contests')
 }
 
-const onIndexContestForCountSuccess = (response) => {
-  const entriesAll = response.entries
-  const contestEntries = []
-  const storeContestId = parseInt(store.contest.id)
-  entriesAll.forEach((entry) => {
-    if (entry.contest.id === storeContestId) {
-      contestEntries.push(entry)
-    }
-  })
-  const data = {contest: {'entrants_current': contestEntries.length}}
-  console.log(data)
-  api.updateContest(data)
-    .then(onUpdateContestSuccess)
-    .catch(onUpdateContestFailure)
-}
+// const onIndexContestForCountSuccess = (response) => {
+//   const entriesAll = response.entries
+//   const contestEntries = []
+//   const storeContestId = parseInt(store.contest.id)
+//   entriesAll.forEach((entry) => {
+//     if (entry.contest.id === storeContestId) {
+//       contestEntries.push(entry)
+//     }
+//   })
+//   const data = {contest: {'entrants_current': contestEntries.length}}
+//   console.log(data)
+//   api.updateContest(data)
+//     .then(onUpdateContestSuccess)
+//     .catch(onUpdateContestFailure)
+// }
 
-const onIndexContestForCountFailure = () => {
-  $('.message').text('Failed to find your contests')
-}
+// const onIndexContestForCountFailure = () => {
+//   $('.message').text('Failed to find your contests')
+// }
 
 const onIndexlineupsSuccess = (response) => {
-  const entriesAll = response.entries
-  const ownerEntries = []
-  entriesAll.forEach(function (entry) {
-    if (entry.user.id === store.user.id) {
-      ownerEntries.push(entry)
-    }
-  })
-  const showLineupHtml = showAllLineups({ entries: ownerEntries })
+  store.entries = response.entries
+  const userLineups = store.entries.filter(entry => entry.user.id === store.user.id)
+  const showLineupHtml = showAllLineups({ entries: userLineups })
   $('#lineup-card').empty()
   $('#lineup-card').append(showLineupHtml)
 }
@@ -172,11 +167,7 @@ const onUpdateContestFailure = () => {
 
 const onDeleteEntrySuccess = () => {
   $('.message').text('Entry deleted')
-  $('#lineups-view-div').hide()
-  $('#owned-contest-view-div').show()
-  api.indexEntries()
-    .then(onIndexContestForCountSuccess)
-    .catch(onIndexContestForCountFailure)
+  $('#modalDeleteLineup').modal('hide')
 }
 
 const onDeleteEntryFailure = () => {
@@ -194,8 +185,6 @@ module.exports = {
   onIndexContestsFailure,
   onIndexMyContestsSuccess,
   onIndexMyContestsFailure,
-  onIndexContestForCountSuccess,
-  onIndexContestForCountFailure,
   onIndexlineupsSuccess,
   onIndexlineupsFailure,
   onShowEntrySuccess,

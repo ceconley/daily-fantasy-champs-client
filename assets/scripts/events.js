@@ -2,6 +2,14 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store.js')
 
+const storeDeleteLineupData = (event) => {
+  console.log(event.target)
+  store.entryId = event.target.id
+  store.contestId = $(event.target).data('contest')
+}
+
+// CRUD ACTIONS
+
 // CREATE ACTIONS
 
 const onCreateLineup1 = (event) => {
@@ -78,6 +86,7 @@ const onCreateEntry = () => {
   }}
   api.createEntry(data)
     .then(ui.onCreateEntrySuccess)
+    .then(showMyContests)
     .catch(ui.onCreateEntryFailure)
 }
 
@@ -190,15 +199,22 @@ const onUpdateChangedLineup = () => {
     .catch(ui.onUpdateLineupFailure)
 }
 
-// DELETE ACTIONS
-const onDeleteEntry = (event) => {
-  // store.contestId = $(event.target).data('contest')
-  // console.log(store.contestId)
-  // const data = event.target.id
-  api.indexEntries()
-    .then(ui.onIndexContestForCountSuccess)
+const onUpdateContest = () => {
+  const entriesAll = store.entries
+  const contestEntries = entriesAll.filter(entry => entry.contest.id === store.contestId)
+  const data = {contest: {'entrants_current': contestEntries.length}}
+  api.updateContest(data)
     .then()
-    .catch(ui.onIndexContestForCountFailure)
+    .catch()
+}
+
+// DELETE ACTIONS
+const onDeleteEntry = () => {
+  onUpdateContest()
+  api.deleteEntry()
+    .then(ui.onDeleteEntrySuccess)
+    .then(showMyLineups)
+    .catch(ui.onDeleteEntryFailure)
 }
 
 // VIEWS
@@ -252,6 +268,7 @@ const showAvailableContests = (event) => {
 // const data = {contest: {'entrants_current': contestEntries.length}}
 
 module.exports = {
+  storeDeleteLineupData,
   onCreateLineup1,
   onCreateLineup2,
   onCreateLineup3,
