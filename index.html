@@ -354,7 +354,7 @@
                   </tr>
                 </tbody>
               </table>
-              <button id="update-lineup1" data-toggle="modal" data-target="#modalEnterUpdatedLineup">Update</button>
+              <button id="update-lineup1">Update</button>
             </div>
 
             <!-- Lineup 2 -->
@@ -405,7 +405,7 @@
                   </tr>
                 </tbody>
               </table>
-              <button id="update-lineup2" data-toggle="modal" data-target="#modalEnterUpdatedLineup">Update</button>
+              <button id="update-lineup2">Update</button>
             </div>
 
             <!-- Lineup 3 -->
@@ -456,24 +456,8 @@
                   </tr>
                 </tbody>
               </table>
-              <button id="update-lineup3" data-toggle="modal" data-target="#modalEnterUpdatedLineup">Update</button>
+              <button id="update-lineup3">Update</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- UPDATE LINEUP MODAL -->
-
-    <div class="modal fade" id="modalEnterUpdatedLineup">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-body" id="enterUpdatedLineupBody">
-            <div class="entry-confirm"></div>
-            <button id="enter-updated-lineup">Enter</button>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary close" data-dismiss="modal">CLOSE</button>
           </div>
         </div>
       </div>
@@ -482,11 +466,12 @@
     <!-- DELETE LINEUP MODAL -->
 
     <div class="modal fade" id="modalDeleteLineup">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog" style="width:500px;">
         <div class="modal-content">
           <div class="modal-body">
             <h3>Confirmation</h3>
-            <p class="delete-confirm">Are you sure you want to delete this lineup?</p>
+            <h4>Are you sure you want to delete this lineup?</h4>
+            <p>This will withdraw you from the contest.</p>
             <button id="delete-lineup">Delete</button>
           </div>
           <div class="modal-footer">
@@ -503,7 +488,7 @@
         <div class="modal-content">
           <div class="modal-body" id="enterLineupBody">
             <h3>Confirmation</h3>
-            <p class="entry-confirm"></p>
+            <p class="entry-confirm table-responsive"></p>
             <button id="enter-lineup">Enter</button>
           </div>
           <div class="modal-footer">

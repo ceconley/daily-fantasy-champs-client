@@ -50,7 +50,7 @@ const showContest = (event) =>
 
 const updateLineup = (data) =>
   $.ajax({
-    url: config.apiUrl + `/entries/${store.entryId}`,
+    url: config.apiUrl + `/lineups/${store.lineupId}`,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

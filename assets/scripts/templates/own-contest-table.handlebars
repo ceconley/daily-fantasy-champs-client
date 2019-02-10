@@ -14,8 +14,8 @@
       {{#each entries as |entries|}}
       <tr class="contest-row">
         <td class="contest-name" id="{{this.contest.id}}" data-entry-id="{{this.id}}" data-toggle="modal" data-target="#modalContestCard">{{this.contest.name}}</td>
-        <td>
-          <table class="table-bordered">
+        <td class="table-responsive">
+          <table class="table-bordered table-in-table">
             <tr>
               <td>{{this.lineup.qb}}</td>
               <td>{{this.lineup.wr1}}</td>

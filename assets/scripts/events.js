@@ -3,7 +3,6 @@ const ui = require('./ui')
 const store = require('./store.js')
 
 const storeDeleteLineupData = (event) => {
-  console.log(event.target)
   store.entryId = event.target.id
   store.contestId = $(event.target).data('contest')
 }
@@ -12,9 +11,8 @@ const storeDeleteLineupData = (event) => {
 
 // CREATE ACTIONS
 
-const onCreateLineup1 = (event) => {
-  event.preventDefault()
-  const data = {lineup: {
+const onStoreLineup1 = () => {
+  store.lineup = {lineup: {
     qb: 'Patrick Mahomes',
     rb1: 'Sony Michel',
     rb2: 'Damien Williams',
@@ -27,15 +25,12 @@ const onCreateLineup1 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = data
-  api.createLineup(data)
-    .then(ui.onCreatelineupSuccess)
-    .catch(ui.onCreatelineupFailure)
+  ui.onShowEntrySuccess()
+  $('#modalEnterLineup').modal('show')
 }
 
-const onCreateLineup2 = (event) => {
-  event.preventDefault()
-  const data = {lineup: {
+const onStoreLineup2 = () => {
+  store.lineup = {lineup: {
     qb: 'Tom Brady',
     rb1: 'Todd Gurley',
     rb2: 'Damien Williams',
@@ -48,15 +43,12 @@ const onCreateLineup2 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = data
-  api.createLineup(data)
-    .then(ui.onCreatelineupSuccess)
-    .catch(ui.onCreatelineupFailure)
+  ui.onShowEntrySuccess()
+  $('#modalEnterLineup').modal('show')
 }
 
-const onCreateLineup3 = (event) => {
-  event.preventDefault()
-  const data = {lineup: {
+const onStoreLineup3 = () => {
+  store.lineup = {lineup: {
     qb: 'Jared Goff',
     rb1: 'Todd Gurley',
     rb2: 'Alvin Kamara',
@@ -69,29 +61,41 @@ const onCreateLineup3 = (event) => {
     score: 0.0
   }
   }
-  store.lineup = data
-  api.createLineup(data)
-    .then(ui.onCreatelineupSuccess)
-    .catch(ui.onCreatelineupFailure)
+  ui.onShowEntrySuccess()
+  $('#modalEnterLineup').modal('show')
 }
 
-const onCreateEntry = () => {
+const onCreateLineup = () => {
+  const data = store.lineup
+  api.createLineup(data)
+    .then(onCreateEntry)
+    .catch(ui.onCreateEntryFailure)
+}
+
+const onCreateEntry = (response) => {
   const user = store.user.id
   const contest = parseInt(store.contest.id)
-  const lineup = store.lineup.id
+  const lineupId = response.lineup.id
   const data = {entry: {
     user_id: user,
     contest_id: contest,
-    lineup_id: lineup
+    lineup_id: lineupId
   }}
   api.createEntry(data)
     .then(ui.onCreateEntrySuccess)
-    .then(showMyContests)
+    .then(onIndexEntries)
     .catch(ui.onCreateEntryFailure)
 }
 
 // READ ACTIONS
 // INDEX
+
+const onIndexEntries = () => {
+  api.indexEntries()
+    .then(ui.onIndexEntriesSuccess)
+    .then(onUpdateContestEntrantsUp)
+    .catch(ui.onCreateEntryFailure)
+}
 
 const onIndexContests = () => {
   api.indexContests()
@@ -114,9 +118,9 @@ const onIndexLineups = () => {
 // SHOW
 
 const onShowContest = (event) => {
-  console.log(event.target)
+  store.contestId = event.target.id
   store.contest = event.target
-  api.indexEntries(event)
+  api.indexEntries()
     .then(ui.onShowContestSuccess)
     .catch(ui.onShowContestFailure)
 }
@@ -180,29 +184,27 @@ const onUpdateLineup3 = (event) => {
     score: 0.0
   }
   }
-  store.lineupId = data
-  api.createLineup(data)
-    .then(ui.onCreateUpdatedLineupSuccess)
-    .catch(ui.onCreateUpdatedLineupFailure)
-}
-
-const onUpdateChangedLineup = () => {
-  const data = {entry: {
-    id: store.entryId,
-    user_id: store.user.id,
-    contest_id: store.contest.id,
-    lineup_id: store.lineup.id
-  }
-  }
   api.updateLineup(data)
     .then(ui.onUpdateLineupSuccess)
+    .then(onIndexMyConstests)
     .catch(ui.onUpdateLineupFailure)
 }
 
-const onUpdateContest = () => {
+const onUpdateContestEntrantsUp = () => {
   const entriesAll = store.entries
+  console.log(store.entries)
   const contestEntries = entriesAll.filter(entry => entry.contest.id === store.contestId)
-  const data = {contest: {'entrants_current': contestEntries.length}}
+  const data = {contest: {'entrants_current': contestEntries.length + 1}}
+  api.updateContest(data)
+    .then(showMyContests)
+    .catch()
+}
+
+const onUpdateContestEntrantsDown = () => {
+  const entriesAll = store.entries
+  console.log(entriesAll)
+  const contestEntries = entriesAll.filter(entry => entry.contest.id === store.contestId)
+  const data = {contest: {'entrants_current': contestEntries.length - 1}}
   api.updateContest(data)
     .then()
     .catch()
@@ -210,7 +212,7 @@ const onUpdateContest = () => {
 
 // DELETE ACTIONS
 const onDeleteEntry = () => {
-  onUpdateContest()
+  onUpdateContestEntrantsDown()
   api.deleteEntry()
     .then(ui.onDeleteEntrySuccess)
     .then(showMyLineups)
@@ -232,6 +234,7 @@ const changeLineupLink = (event) => {
   $('#choose-lineup-view-div').hide()
   $('#change-lineup-view-div').show()
   $('#lineups-view-div').hide()
+  store.lineupId = event.target.id
   store.entryId = $(event.target).data('entry-id')
   store.contestId = $(event.target).data('contest-id')
 }
@@ -263,15 +266,12 @@ const showAvailableContests = (event) => {
   onIndexContests(event)
 }
 
-// const entriesAll = store.entries
-// const contestEntries = entriesAll.filter(entry => entry.contest.id === storeContestId)
-// const data = {contest: {'entrants_current': contestEntries.length}}
-
 module.exports = {
   storeDeleteLineupData,
-  onCreateLineup1,
-  onCreateLineup2,
-  onCreateLineup3,
+  onStoreLineup1,
+  onStoreLineup2,
+  onStoreLineup3,
+  onCreateLineup,
   onCreateEntry,
   onIndexContests,
   onIndexLineups,
@@ -280,7 +280,6 @@ module.exports = {
   onUpdateLineup1,
   onUpdateLineup2,
   onUpdateLineup3,
-  onUpdateChangedLineup,
   onDeleteEntry,
   onChooseLineup,
   changeLineupLink,

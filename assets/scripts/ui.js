@@ -3,7 +3,6 @@ const showAllLineups = require('./templates/lineup-card.handlebars')
 const showOneContest = require('./templates/contest-card.handlebars')
 const showMyContests = require('./templates/own-contest-table.handlebars')
 const store = require('./store.js')
-const api = require('./api')
 // const toastr = require('./toasts.js')
 
 // CREATE ACTIONS
@@ -23,9 +22,6 @@ const onCreateEntrySuccess = () => {
   $('#choose-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
   $('.message').text('Lineup entered successfully')
-  // api.indexEntries()
-  // .then(onIndexContestForCountSuccess)
-  // .catch(onIndexContestForCountFailure)
 }
 
 const onCreateEntryFailure = () => {
@@ -34,6 +30,7 @@ const onCreateEntryFailure = () => {
 
 const onCreateUpdatedLineupSuccess = (response) => {
   store.lineup = response.lineup
+  console.log(store.lineup)
   $('#modalEnterUpdatedLineup').modal('show')
 }
 
@@ -43,6 +40,11 @@ const onCreateUpdatedLineupFailure = () => {
 
 // READ ACTIONS
 // INDEX
+
+const onIndexEntriesSuccess = (response) => {
+  store.entries = response.entries
+  console.log(store.entries)
+}
 
 const onIndexContestsSuccess = (response) => {
   const showContestsHtml = showAllContests({ contests: response.contests })
@@ -71,28 +73,9 @@ const onIndexMyContestsFailure = () => {
   $('.message').text('Failed to find your contests')
 }
 
-// const onIndexContestForCountSuccess = (response) => {
-//   const entriesAll = response.entries
-//   const contestEntries = []
-//   const storeContestId = parseInt(store.contest.id)
-//   entriesAll.forEach((entry) => {
-//     if (entry.contest.id === storeContestId) {
-//       contestEntries.push(entry)
-//     }
-//   })
-//   const data = {contest: {'entrants_current': contestEntries.length}}
-//   console.log(data)
-//   api.updateContest(data)
-//     .then(onUpdateContestSuccess)
-//     .catch(onUpdateContestFailure)
-// }
-
-// const onIndexContestForCountFailure = () => {
-//   $('.message').text('Failed to find your contests')
-// }
-
 const onIndexlineupsSuccess = (response) => {
   store.entries = response.entries
+  console.log(store.entries)
   const userLineups = store.entries.filter(entry => entry.user.id === store.user.id)
   const showLineupHtml = showAllLineups({ entries: userLineups })
   $('#lineup-card').empty()
@@ -131,7 +114,29 @@ const onShowContestsFailure = () => {
 }
 
 const onShowEntrySuccess = () => {
-  $('.entry-confirm').text(`${store.user.email} is entering ${store.lineup.qb}, ${store.lineup.rb1}, ${store.lineup.rb2}, ${store.lineup.wr1}, ${store.lineup.wr2}, ${store.lineup.wr3}, ${store.lineup.te}, ${store.lineup.flex}, ${store.lineup.dst}, in the ${store.contest.innerHTML} contest.`)
+  $('.entry-confirm').text('')
+  $('.entry-confirm').append(`
+    <table class="table-bordered">
+      <tr>
+        <td>${store.lineup.lineup.qb}</td>
+        <td>${store.lineup.lineup.wr1}</td>
+        <td>${store.lineup.lineup.te}</td>
+      </tr>
+      <tr>
+        <td>${store.lineup.lineup.rb1}</td>
+        <td>${store.lineup.lineup.wr2}</td>
+        <td>${store.lineup.lineup.flex}</td>
+      </tr>
+      <tr>
+        <td>${store.lineup.lineup.rb2}</td>
+        <td>${store.lineup.lineup.wr3}</td>
+        <td>${store.lineup.lineup.dst}</td>
+      </tr>
+    </table>
+    <p>in the ${store.contest.innerHTML} contest.</p>
+  `)
+
+  // `${store.user.email} is entering ${store.lineup.qb}, ${store.lineup.rb1}, ${store.lineup.rb2}, ${store.lineup.wr1}, ${store.lineup.wr2}, ${store.lineup.wr3}, ${store.lineup.te}, ${store.lineup.flex}, ${store.lineup.dst}, in the ${store.contest.innerHTML} contest.`)
 }
 const onShowEntryFailure = () => {
   $('.message').text('Failed getting entry')
@@ -144,9 +149,6 @@ const onUpdateLineupSuccess = () => {
   $('#change-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
   $('.message').text('Lineup updated')
-  api.indexContests()
-    .then(onIndexMyContestsSuccess)
-    .catch(onIndexMyContestsFailure)
 }
 
 const onUpdateLineupFailure = () => {
@@ -154,9 +156,6 @@ const onUpdateLineupFailure = () => {
 }
 
 const onUpdateContestSuccess = () => {
-  api.indexEntries()
-    .then(onIndexMyContestsSuccess)
-    .catch(onIndexMyContestsFailure)
 }
 
 const onUpdateContestFailure = () => {
@@ -181,6 +180,7 @@ module.exports = {
   onCreatelineupFailure,
   onCreateEntrySuccess,
   onCreateEntryFailure,
+  onIndexEntriesSuccess,
   onIndexContestsSuccess,
   onIndexContestsFailure,
   onIndexMyContestsSuccess,

@@ -56,6 +56,13 @@ button {
 
 .each-lineup {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.entry-confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #header-div {
@@ -98,6 +105,12 @@ input {
   text-align: center;
 }
 
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .modal-content {
   background-color: black;
   border: 1px solid white;
@@ -124,4 +137,8 @@ input {
 .table {
   background-color: black;
   border-radius: 6pt;
+}
+
+.table-in-table {
+  font-size: 10pt;
 }
