@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Boston Truckstyle';
+  src: url('public/lhf_boston_truckstyle.ttf') format('truetype');
+}
+
 @import '~bootstrap/scss/bootstrap';
 // @import '~toastr/build/toastr.css';
 
@@ -67,6 +72,15 @@ button {
 
 #header-div {
   margin: 0;
+}
+
+h1 {
+  margin-top: 10px;
+  padding-top: 10px;
+  font-family: 'Boston Truckstyle';
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h3 {
