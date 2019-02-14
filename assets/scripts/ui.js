@@ -30,7 +30,6 @@ const onCreateEntryFailure = () => {
 
 const onCreateUpdatedLineupSuccess = (response) => {
   store.lineup = response.lineup
-  console.log(store.lineup)
   $('#modalEnterUpdatedLineup').modal('show')
 }
 
@@ -43,7 +42,6 @@ const onCreateUpdatedLineupFailure = () => {
 
 const onIndexEntriesSuccess = (response) => {
   store.entries = response.entries
-  console.log(store.entries)
 }
 
 const onIndexContestsSuccess = (response) => {
@@ -75,7 +73,6 @@ const onIndexMyContestsFailure = () => {
 
 const onIndexlineupsSuccess = (response) => {
   store.entries = response.entries
-  console.log(store.entries)
   const userLineups = store.entries.filter(entry => entry.user.id === store.user.id)
   const showLineupHtml = showAllLineups({ entries: userLineups })
   $('#lineup-card').empty()

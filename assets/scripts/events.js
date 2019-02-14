@@ -192,7 +192,6 @@ const onUpdateLineup3 = (event) => {
 
 const onUpdateContestEntrantsUp = () => {
   const entriesAll = store.entries
-  console.log(store.entries)
   const contestEntries = entriesAll.filter(entry => entry.contest.id === store.contestId)
   const data = {contest: {'entrants_current': contestEntries.length + 1}}
   api.updateContest(data)
@@ -202,7 +201,6 @@ const onUpdateContestEntrantsUp = () => {
 
 const onUpdateContestEntrantsDown = () => {
   const entriesAll = store.entries
-  console.log(entriesAll)
   const contestEntries = entriesAll.filter(entry => entry.contest.id === store.contestId)
   const data = {contest: {'entrants_current': contestEntries.length - 1}}
   api.updateContest(data)
