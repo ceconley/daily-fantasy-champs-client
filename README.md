@@ -1,5 +1,7 @@
 # Daily Fantasy Champs
 
+![Pic of App](https://github.com/ceconley/daily-fantasy-champs-client/blob/master/public/app-screen-shot.png "App")
+
 Daily Fantasy Champs is a weekly Fantasy Football game.  Every week, users can choose between predetermined lineups and enter them in different contests.  Each lineup consists of a different combination of players.  Points are assigned based on the individual statistic of the players.  Lineups will be scored on the aggregate of the individual player points.  The Lineup with the highest score wins the contest.  Every week there will be different combinations of players to make up the lineups.  
 
 ### Backend Repo
@@ -44,11 +46,6 @@ I started by writing out user stories.  Once I had these, I drew up some wirefra
 
 ### Wireframes
 [Wireframe image](https://github.com/ceconley/daily-fantasy-champs-client/blob/master/public/wireframes.jpg)
-
-
-![Pic of App](https://github.com/ceconley/daily-fantasy-champs-client/blob/master/public/app-screen-shot.png "App")
-
- 
 
 ### Installation Instructions
 *	Fork
