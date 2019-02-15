@@ -2,6 +2,7 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store.js')
 
+// COLLECT DATA FOR DELTE FUNCTION
 const storeDeleteLineupData = (event) => {
   store.entryId = event.target.id
   store.contestId = $(event.target).data('contest')
@@ -87,8 +88,7 @@ const onCreateEntry = (response) => {
     .catch(ui.onCreateEntryFailure)
 }
 
-// READ ACTIONS
-// INDEX
+// READ - INDEX
 
 const onIndexEntries = () => {
   api.indexEntries()
@@ -115,7 +115,7 @@ const onIndexLineups = () => {
     .catch(ui.onIndexlineupsFailure)
 }
 
-// SHOW
+// READ - SHOW
 
 const onShowContest = (event) => {
   store.contestId = event.target.id
@@ -273,8 +273,8 @@ module.exports = {
   onCreateEntry,
   onIndexContests,
   onIndexLineups,
-  onShowContest,
   onIndexMyConstests,
+  onShowContest,
   onUpdateLineup1,
   onUpdateLineup2,
   onUpdateLineup3,

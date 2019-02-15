@@ -37,8 +37,7 @@ const onCreateUpdatedLineupFailure = () => {
   $('.message').text('Failed to save lineup')
 }
 
-// READ ACTIONS
-// INDEX
+// READ - INDEX
 
 const onIndexEntriesSuccess = (response) => {
   store.entries = response.entries
@@ -83,7 +82,7 @@ const onIndexlineupsFailure = () => {
   $('.message').text('Failed to find lineups')
 }
 
-// Show
+// READ - SHOW
 
 const onShowContestSuccess = (response) => {
   const entriesAll = response.entries
@@ -132,14 +131,13 @@ const onShowEntrySuccess = () => {
     </table>
     <p>in the ${store.contest.innerHTML} contest.</p>
   `)
-
-  // `${store.user.email} is entering ${store.lineup.qb}, ${store.lineup.rb1}, ${store.lineup.rb2}, ${store.lineup.wr1}, ${store.lineup.wr2}, ${store.lineup.wr3}, ${store.lineup.te}, ${store.lineup.flex}, ${store.lineup.dst}, in the ${store.contest.innerHTML} contest.`)
 }
+
 const onShowEntryFailure = () => {
   $('.message').text('Failed getting entry')
 }
 
-// UPDATE ACTIONS
+// UPDATE
 
 const onUpdateLineupSuccess = () => {
   $('#modalEnterUpdatedLineup').modal('hide')
@@ -159,7 +157,7 @@ const onUpdateContestFailure = () => {
   $('.message').text('Contest did not update')
 }
 
-// DELETE ACTIONS
+// DELETE
 
 const onDeleteEntrySuccess = () => {
   $('.message').text('Entry deleted')

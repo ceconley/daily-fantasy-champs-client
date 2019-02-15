@@ -1,7 +1,7 @@
 const config = require('./config')
 const store = require('./store.js')
 
-// CREATE ACTIONS
+// CREATE
 
 const createLineup = (data) =>
   $.ajax({
@@ -23,8 +23,7 @@ const createEntry = (data) =>
     data
   })
 
-// READ ACTIONS
-// INDEX
+// READ - INDEX
 
 const indexContests = () =>
   $.ajax({
@@ -38,7 +37,7 @@ const indexEntries = () =>
     method: 'GET'
   })
 
-// Show
+// READ - SHOW
 
 const showContest = (event) =>
   $.ajax({
@@ -46,7 +45,7 @@ const showContest = (event) =>
     method: 'GET'
   })
 
-// UPDATE ACTIONS
+// UPDATE
 
 const updateLineup = (data) =>
   $.ajax({
@@ -68,7 +67,7 @@ const updateContest = (data) =>
     data
   })
 
-// DELETE ACTIONS
+// DELETE
 
 const deleteEntry = (data) =>
   $.ajax({

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>DFC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,95 +14,98 @@
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     <!-- <script src="toastr.js"></script> -->
   </head>
+
   <body>
 
     <!-- HEADER -->
     <div class="container-fluid" id="header-div">
       <div class="row header-row">
         <div class="col-sm-9">
+
           <h1>Daily Fantasy <br/> Champs</h1>
+
         </div>
+
         <div class="col-sm-3 auth-links logged-out">
           <a class="link" id=sign-up-link>Sign Up</a> |
           <a class="link" id=log-in-link>Log In</a>
         </div>
+
         <div class="col-sm-3 auth-links logged-in">
           <a class="link" id=change-password-link>Change Password</a> |
           <a class="link" id=log-out-link>Log Out</a>
         </div> 
+
       </div>
-      <!-- <div class="row message-row">
-        <p class="message"></p>
-      </div> -->
+
       <div class="row nav-row">
+
         <!-- BUTTON NAV BAR -->
         <nav class="navbar navbar-inverse">
           <button class="link nav" id="my-lineups">My Lineups</button>
           <button class="link nav" id="my-contests">My Contests</button>
           <button class="link nav" id="available-contests">Available Contests</button>
         </nav>
+
       </div>
     </div>
     <hr>
 
     <!-- AUTH VIEWS -->
-
     <div class="auth-div">
 
       <!-- SIGN UP -->
       <div class="container" id="sign-up-view-div">
         <div class="row">
-          <div>
-            <form id="sign-up">
-              <fieldset>
-                <legend>Sign Up</legend>
-                <input type="text" name="credentials[email]" placeholder="Email" class="forms">
-                <input type="password" name="credentials[password]" placeholder="Password" class="forms">
-                <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" class="forms">
-                <input type="submit" value="Sign Up" class="buttons">
-              </fieldset>
-            </form>
-          </div>
+
+          <form id="sign-up">
+            <fieldset>
+              <legend>Sign Up</legend>
+              <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+              <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+              <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" class="forms">
+              <input type="submit" value="Sign Up" class="buttons">
+            </fieldset>
+          </form>
+
         </div>
       </div>
 
       <!-- LOG IN -->
       <div class="container" id="log-in-view-div">
         <div class="row">
-          <div>
-            <form id="log-in">
-              <fieldset>
-                <legend>Log In</legend>
-                <input type="text" name="credentials[email]" placeholder="Email" class="forms">
-                <input type="password" name="credentials[password]" placeholder="Password" class="forms">
-                <input type="submit" value="Log In" class="buttons">
-              </fieldset>
-            </form>
-          </div>
+
+          <form id="log-in">
+            <fieldset>
+              <legend>Log In</legend>
+              <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+              <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+              <input type="submit" value="Log In" class="buttons">
+            </fieldset>
+          </form>
+
         </div>
       </div>
 
       <!-- CHANGE PASSWORD -->
       <div class="container" id="change-password-view-div">
         <div class="row">
-          <div>
-            <form id="change-password">
-              <fieldset>
-                <input type="password" name="passwords[old]" placeholder="Old password" class="forms">
-                <input type="password" name="passwords[new]" placeholder="New password" class="forms">
-                <input type="password" name="credentials[password_confirmation]" placeholder="Confirm New Password" class="forms">
-                <input type="submit" value="Change password" class="buttons">
-                <a class="close" id="change-password-close">close</a>
-              </fieldset>
-            </form>
-          </div>
+
+          <form id="change-password">
+            <fieldset>
+              <input type="password" name="passwords[old]" placeholder="Old password" class="forms">
+              <input type="password" name="passwords[new]" placeholder="New password" class="forms">
+              <input type="password" name="credentials[password_confirmation]" placeholder="Confirm New Password" class="forms">
+              <input type="submit" value="Change password" class="buttons">
+              <a class="close" id="change-password-close">close</a>
+            </fieldset>
+          </form>
+
         </div>
       </div>
-    
     </div>
 
     <!-- OTHER VIEWS -->
-
     <div class="main-body"></div>
 
       <!-- AVAILABLE CONTESTS -->

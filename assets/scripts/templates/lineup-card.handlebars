@@ -1,9 +1,14 @@
 <div class="each-lineup">
+
   {{#each entries as |entry|}}
   <div class="lineup-table has-table"> 
+    
     <h5>Entered in : The {{this.contest.name}}</h5>
+    
     <a class="changeLineupLink" id={{this.lineup.id}} data-entry-id={{this.id}} data-contest-id={{this.contest.id}}>Change Lineup</a> | 
+    
     <a class="delete-lineup" id="{{this.id}}" data-contest="{{this.contest.id}}" data-toggle="modal" data-target="#modalDeleteLineup">Delete</a>
+    
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -52,4 +57,5 @@
     </table>
   </div>
   {{/each}}
+  
 </div>
