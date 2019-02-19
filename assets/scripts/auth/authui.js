@@ -1,5 +1,14 @@
 const store = require('../store.js')
-// const toastr = require('../toasts.js')
+const toastr = require('toastr')
+
+toastr.options = {
+  'positionClass': 'toast-top-center',
+  'preventDuplicates': true,
+  'showDuration': '500',
+  'hideDuration': '500',
+  'timeOut': '2000',
+  'extendedTimeOut': '5000'
+}
 
 $('.logged-in').hide()
 $('#sign-up-view-div').hide()
@@ -13,55 +22,55 @@ $('#change-lineup-view-div').hide()
 $('.navbar').hide()
 
 const resetAuthForms = () => {
+  toastr.clear()
   $('#sign-up')[0].reset()
   $('#log-in')[0].reset()
   $('#change-password')[0].reset()
 }
 
 const signUpSuccess = () => {
-  $('.message').text('Signed Up Successfully')
   resetAuthForms()
   $('#sign-up-view-div').hide()
   $('#log-in-view-div').show()
   $('#change-password-view-div').hide()
+  toastr.success('Signed Up Successfully')
 }
 
-const signUpFailure = function () {
-  $('.message').text('Signed Up Failed')
+const signUpFailure = () => {
   resetAuthForms()
+  toastr.warning('Sign Up Failed')
 }
 
-const logInSuccess = function (data) {
+const logInSuccess = (data) => {
+  resetAuthForms()
   store.user = data.user
-  $('.message').text('Logged In Successfully')
-  resetAuthForms()
   $('.logged-in').show()
   $('.logged-out').hide()
   $('#log-in-view-div').hide()
   $('#available-contest-view-div').show()
   $('.navbar').show()
+  toastr.success('Logged In Successfully')
 }
 
-const logInFailure = function () {
-  $('.message').text('Log In Failed')
+const logInFailure = () => {
   resetAuthForms()
+  toastr.warning('Log In Failed')
 }
 
-const changePasswordSuccess = function () {
-  $('.message').text('Password changed successfully')
+const changePasswordSuccess = () => {
+  resetAuthForms()
   $('#change-password-view-div').hide()
   $('#available-contest-view-div').show()
   $('.navbar').show()
-  resetAuthForms()
+  toastr.success('Password changed successfully')
 }
 
-const changePasswordFailure = function () {
-  $('.message').text('Error on password change')
+const changePasswordFailure = () => {
   resetAuthForms()
+  toastr.warning('Change Password Failed')
 }
 
-const logOutSuccess = function () {
-  $('.message').text('Logged Out Successfully')
+const logOutSuccess = () => {
   store.user = null
   resetAuthForms()
   $('.logged-in').hide()
@@ -75,11 +84,12 @@ const logOutSuccess = function () {
   $('#individual-contest-view-div').hide()
   $('#choose-lineup-view-div').hide()
   $('.navbar').hide()
+  toastr.success('Logged Out Successfully')
 }
 
-const logOutFailure = function () {
+const logOutFailure = () => {
   resetAuthForms()
-  $('.message').text('Log Out Failed')
+  toastr.warning('Log Out Failed')
 }
 
 module.exports = {

@@ -3,7 +3,16 @@ const showAllLineups = require('./templates/lineup-card.handlebars')
 const showOneContest = require('./templates/contest-card.handlebars')
 const showMyContests = require('./templates/own-contest-table.handlebars')
 const store = require('./store.js')
-// const toastr = require('./toasts.js')
+const toastr = require('toastr')
+
+toastr.options = {
+  'positionClass': 'toast-top-center',
+  'preventDuplicates': true,
+  'showDuration': '500',
+  'hideDuration': '500',
+  'timeOut': '2000',
+  'extendedTimeOut': '5000'
+}
 
 // CREATE ACTIONS
 
@@ -14,27 +23,18 @@ const onCreatelineupSuccess = (response) => {
 }
 
 const onCreatelineupFailure = () => {
-  $('.message').text('Failed to save lineup')
+  toastr.warning('Failed to save lineup')
 }
 
 const onCreateEntrySuccess = () => {
   $('#modalEnterLineup').modal('hide')
   $('#choose-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
-  $('.message').text('Lineup entered successfully')
+  toastr.success('Lineup entered successfully')
 }
 
 const onCreateEntryFailure = () => {
-  $('.message').text('Failed to enter lineup')
-}
-
-const onCreateUpdatedLineupSuccess = (response) => {
-  store.lineup = response.lineup
-  $('#modalEnterUpdatedLineup').modal('show')
-}
-
-const onCreateUpdatedLineupFailure = () => {
-  $('.message').text('Failed to save lineup')
+  toastr.warning('Failed to enter lineup')
 }
 
 // READ - INDEX
@@ -50,7 +50,7 @@ const onIndexContestsSuccess = (response) => {
 }
 
 const onIndexContestsFailure = () => {
-  $('.message').text('Failed to find contests')
+  toastr.warning('Failed to find contests')
 }
 
 const onIndexMyContestsSuccess = (response) => {
@@ -67,7 +67,7 @@ const onIndexMyContestsSuccess = (response) => {
 }
 
 const onIndexMyContestsFailure = () => {
-  $('.message').text('Failed to find your contests')
+  toastr.warning('Failed to find your contests')
 }
 
 const onIndexlineupsSuccess = (response) => {
@@ -79,7 +79,7 @@ const onIndexlineupsSuccess = (response) => {
 }
 
 const onIndexlineupsFailure = () => {
-  $('.message').text('Failed to find lineups')
+  toastr.warning('Failed to find lineups')
 }
 
 // READ - SHOW
@@ -106,7 +106,7 @@ const onShowContestSuccess = (response) => {
 }
 
 const onShowContestsFailure = () => {
-  $('.message').text('Failed to find contest')
+  toastr.warning('Failed to find contest')
 }
 
 const onShowEntrySuccess = () => {
@@ -134,7 +134,7 @@ const onShowEntrySuccess = () => {
 }
 
 const onShowEntryFailure = () => {
-  $('.message').text('Failed getting entry')
+  toastr.warning('Failed getting entry')
 }
 
 // UPDATE
@@ -143,34 +143,32 @@ const onUpdateLineupSuccess = () => {
   $('#modalEnterUpdatedLineup').modal('hide')
   $('#change-lineup-view-div').hide()
   $('#owned-contest-view-div').show()
-  $('.message').text('Lineup updated')
+  toastr.success('Lineup updated')
 }
 
 const onUpdateLineupFailure = () => {
-  $('.message').text('Lineup did not update')
+  toastr.warning('Lineup did not update')
 }
 
 const onUpdateContestSuccess = () => {
 }
 
 const onUpdateContestFailure = () => {
-  $('.message').text('Contest did not update')
+  toastr.warning('Contest did not update')
 }
 
 // DELETE
 
 const onDeleteEntrySuccess = () => {
-  $('.message').text('Entry deleted')
+  toastr.success('Entry deleted')
   $('#modalDeleteLineup').modal('hide')
 }
 
 const onDeleteEntryFailure = () => {
-  $('.message').text('Failure deleting Entry')
+  toastr.warning('Failure deleting Entry')
 }
 
 module.exports = {
-  onCreateUpdatedLineupSuccess,
-  onCreateUpdatedLineupFailure,
   onCreatelineupSuccess,
   onCreatelineupFailure,
   onCreateEntrySuccess,

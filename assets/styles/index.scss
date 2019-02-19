@@ -1,10 +1,10 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~toastr/build/toastr.css';
+
 @font-face {
   font-family: 'Boston Truckstyle';
   src: url('public/lhf_boston_truckstyle.ttf') format('truetype');
 }
-
-@import '~bootstrap/scss/bootstrap';
-// @import '~toastr/build/toastr.css';
 
 a:hover {
   text-decoration: underline;
@@ -112,6 +112,7 @@ input {
 
 .lineup-table {
   margin: 15px;
+  width: 300px;
 }
 
 .lineup-update {
@@ -131,14 +132,6 @@ input {
   margin-top: 240px;
 }
 
-.message {
-  text-align: center;
-}
-
-.message-row {
-  background: black;
-}
-
 .modal-body {
   display: flex;
   flex-direction: column;
@@ -147,7 +140,7 @@ input {
 
 .modal-content {
   background-color: black;
-  border: 1px solid white;
+  // border: 1px solid white;
   border-radius: 6pt;
 }
 
@@ -178,4 +171,12 @@ input {
 
 .table-in-table {
   font-size: 10pt;
+}
+
+.toast-success {
+  background-color: green;
+}
+
+.toast-warning {
+  background-color: red;
 }

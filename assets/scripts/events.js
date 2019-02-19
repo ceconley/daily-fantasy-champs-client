@@ -142,10 +142,10 @@ const onUpdateLineup1 = (event) => {
     score: 0.0
   }
   }
-  store.lineupId = data
-  api.createLineup(data)
-    .then(ui.onCreateUpdatedLineupSuccess)
-    .catch(ui.onCreateUpdatedLineupFailure)
+  api.updateLineup(data)
+    .then(ui.onUpdateLineupSuccess)
+    .then(onIndexMyConstests)
+    .catch(ui.onUpdateLineupFailure)
 }
 
 const onUpdateLineup2 = (event) => {
@@ -163,10 +163,10 @@ const onUpdateLineup2 = (event) => {
     score: 0.0
   }
   }
-  store.lineupId = data
-  api.createLineup(data)
-    .then(ui.onCreateUpdatedLineupSuccess)
-    .catch(ui.onCreateUpdatedLineupFailure)
+  api.updateLineup(data)
+    .then(ui.onUpdateLineupSuccess)
+    .then(onIndexMyConstests)
+    .catch(ui.onUpdateLineupFailure)
 }
 
 const onUpdateLineup3 = (event) => {
