@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>DFC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Do not add `link` tags-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- <link href="toastr.css" rel="stylesheet"/> -->
+
+    <!-- Do not add `script` tags-->
+    <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+    <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    <!-- <script src="toastr.js"></script> -->
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div class="container-fluid" id="header-div">
+      <div class="row header-row">
+        <div class="col-sm-9">
+
+          <h1>Daily Fantasy <br/> Champs</h1>
+
+        </div>
+
+        <div class="col-sm-3 auth-links logged-out">
+          <a class="link" id=sign-up-link>Sign Up</a> |
+          <a class="link" id=log-in-link>Log In</a>
+        </div>
+
+        <div class="col-sm-3 auth-links logged-in">
+          <a class="link" id=change-password-link>Change Password</a> |
+          <a class="link" id=log-out-link>Log Out</a>
+        </div> 
+
+      </div>
+
+      <div class="row nav-row">
+
+        <!-- BUTTON NAV BAR -->
+        <nav class="navbar navbar-inverse">
+          <button class="link nav" id="my-lineups">My Lineups</button>
+          <button class="link nav" id="my-contests">My Contests</button>
+          <button class="link nav" id="available-contests">Available Contests</button>
+        </nav>
+
+      </div>
+    </div>
+    <hr>
+
+    <!-- AUTH VIEWS -->
+    <div class="auth-div">
+
+      <!-- SIGN UP -->
+      <div class="container" id="sign-up-view-div">
+        <div class="row">
+
+          <form id="sign-up">
+            <fieldset>
+              <legend>Sign Up</legend>
+              <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+              <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+              <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password" class="forms">
+              <input type="submit" value="Sign Up" class="buttons">
+            </fieldset>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- LOG IN -->
+      <div class="container" id="log-in-view-div">
+        <div class="row">
+
+          <form id="log-in">
+            <fieldset>
+              <legend>Log In</legend>
+              <input type="text" name="credentials[email]" placeholder="Email" class="forms">
+              <input type="password" name="credentials[password]" placeholder="Password" class="forms">
+              <input type="submit" value="Log In" class="buttons">
+            </fieldset>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- CHANGE PASSWORD -->
+      <div class="container" id="change-password-view-div">
+        <div class="row">
+
+          <form id="change-password">
+            <fieldset>
+              <input type="password" name="passwords[old]" placeholder="Old password" class="forms">
+              <input type="password" name="passwords[new]" placeholder="New password" class="forms">
+              <input type="password" name="credentials[password_confirmation]" placeholder="Confirm New Password" class="forms">
+              <input type="submit" value="Change password" class="buttons">
+              <a class="close" id="change-password-close">close</a>
+            </fieldset>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER VIEWS -->
+    <div class="main-body"></div>
+
+      <!-- AVAILABLE CONTESTS -->
+      <div class="container" id="available-contest-view-div">
+        <div class="row" id="available-contest-row">
+          <div id="available-contest-div">
+            <h3>Available Contests</h3>
+            <div class="has-table" id="contest-table"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY LINEUPS -->
+      <div class="container" id="lineups-view-div">
+        <div class="row" id="lineups-view-row">
+          <div>
+            <h3>My Lineups</h3>
+            <div id="lineup-card"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY CONTESTS -->
+      <div class="container" id="owned-contest-view-div">
+        <div class="row" id="owned-contest-row">
+          <div>
+            <h3>My Contests</h3>
+            <div class="has-table"  id="own-contests"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INDIVIDUAL CONTESTS -->
+      <div class="container" id="individual-contest-view-div">
+        <div class="row">
+          <div>
+            <h3>Contest: </h3>
+            <div id="contest-card"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHOOSE LINEUP -->
+      <div class="container" id="choose-lineup-view-div">
+        <div class="row">
+          <h3>Choose Lineup</h3>
+        </div>
+        <div class="row">
+          <div class="choose-lineup-div">
+
+            <!-- Lineup 1 -->
+            <div class="lineup-create">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Pos.</th>
+                    <th>Players</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>QB</td>
+                    <td>Patrick Mahomes</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Sony Michel</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Damien Williams</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Julian Edelman</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Tyreek Hill</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Robert Woods</td>
+                  </tr>
+                  <tr>
+                    <td>TE</td>
+                    <td>Rob Gronkowski</td>
+                  </tr>
+                  <tr>
+                    <td>Flex</td>
+                    <td>C.J. Anderson</td>
+                  </tr>
+                  <tr>
+                    <td>DST</td>
+                    <td>Rams</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button id="submit-lineup1">Enter</button>
+            </div>
+
+            <!-- Lineup 2 -->
+            <div class="lineup-create">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Pos.</th>
+                    <th>Players</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>QB</td>
+                    <td>Tom Brady</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Todd Gurley</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Damien Williams</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Tyreek Hill</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Josh Reynolds</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Michael Thomas</td>
+                  </tr>
+                  <tr>
+                    <td>TE</td>
+                    <td>Gerald Everett</td>
+                  </tr>
+                  <tr>
+                    <td>FLEX</td>
+                    <td>Ted Ginn Jr.</td>
+                  </tr>
+                  <tr>
+                    <td>DST</td>
+                    <td>Saints</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button id="submit-lineup2"data-toggle="modal" data-target="#modalEnterLineup">Enter</button>
+            </div>
+
+            <!-- Lineup 3 -->
+            <div class="lineup-create">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Pos.</th>
+                    <th>Players</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>QB</td>
+                    <td>Jared Goff</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Todd Gurley</td>
+                  </tr>
+                  <tr>
+                    <td>RB</td>
+                    <td>Alvin Kamara</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Michael Thomas</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Sammy Watkins</td>
+                  </tr>
+                  <tr>
+                    <td>WR</td>
+                    <td>Chris Hogan</td>
+                  </tr>
+                  <tr>
+                    <td>TE</td>
+                    <td>Travis Kelce</td>
+                  </tr>
+                  <tr>
+                    <td>FLEX</td>
+                    <td>James White</td>
+                  </tr>
+                  <tr>
+                    <td>DST</td>
+                    <td>Patriots</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button id="submit-lineup3"data-toggle="modal" data-target="#modalEnterLineup">Enter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGE LINEUP -->
+      <div class="container" id="change-lineup-view-div">
+        <div class="row">
+          <div>
+            <h3>Choose Lineup</h3>
+            <div class="choose-lineup-div">
+
+              <!-- Lineup 1 -->
+              <div class="lineup-update">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Pos.</th>
+                      <th>Players</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>QB</td>
+                      <td>Patrick Mahomes</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Sony Michel</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Damien Williams</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Julian Edelman</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Tyreek Hill</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Robert Woods</td>
+                    </tr>
+                    <tr>
+                      <td>TE</td>
+                      <td>Rob Gronkowski</td>
+                    </tr>
+                    <tr>
+                      <td>Flex</td>
+                      <td>C.J. Anderson</td>
+                    </tr>
+                    <tr>
+                      <td>DST</td>
+                      <td>Rams</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button id="update-lineup1">Update</button>
+              </div>
+
+              <!-- Lineup 2 -->
+              <div class="lineup-update">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Pos.</th>
+                      <th>Players</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>QB</td>
+                      <td>Tom Brady</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Todd Gurley</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Damien Williams</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Tyreek Hill</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Josh Reynolds</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Michael Thomas</td>
+                    </tr>
+                    <tr>
+                      <td>TE</td>
+                      <td>Gerald Everett</td>
+                    </tr>
+                    <tr>
+                      <td>FLEX</td>
+                      <td>Ted Ginn Jr.</td>
+                    </tr>
+                    <tr>
+                      <td>DST</td>
+                      <td>Saints</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button id="update-lineup2">Update</button>
+              </div>
+
+              <!-- Lineup 3 -->
+              <div class="lineup-update">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Pos.</th>
+                      <th>Players</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>QB</td>
+                      <td>Jared Goff</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Todd Gurley</td>
+                    </tr>
+                    <tr>
+                      <td>RB</td>
+                      <td>Alvin Kamara</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Michael Thomas</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Sammy Watkins</td>
+                    </tr>
+                    <tr>
+                      <td>WR</td>
+                      <td>Chris Hogan</td>
+                    </tr>
+                    <tr>
+                      <td>TE</td>
+                      <td>Travis Kelce</td>
+                    </tr>
+                    <tr>
+                      <td>FLEX</td>
+                      <td>James White</td>
+                    </tr>
+                    <tr>
+                      <td>DST</td>
+                      <td>Patriots</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button id="update-lineup3">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE LINEUP MODAL -->
+
+      <div class="modal fade" id="modalDeleteLineup">
+        <div class="modal-dialog" style="width:500px;">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h3>Confirmation</h3>
+              <h4>Are you sure you want to delete this lineup?</h4>
+              <p>This will withdraw you from the contest.</p>
+              <button id="delete-lineup">Delete</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close" data-dismiss="modal">CLOSE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTER LINEUP MODAL -->
+
+      <div class="modal fade" id="modalEnterLineup">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body" id="enterLineupBody">
+              <h3>Confirmation</h3>
+              <p class="entry-confirm table-responsive"></p>
+              <button id="enter-lineup">Enter</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close" data-dismiss="modal">CLOSE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTEST DETAIL MODAL -->
+
+      <div class="modal fade" id="modalContestCard">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-body" id="contestCardBody">
+              <button id="join-contest">Join</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close" data-dismiss="modal">CLOSE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+  </body>
+</html>
